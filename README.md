@@ -5,22 +5,25 @@
 
 TODO description
 
+## Usage
+
+
 ## Mobile Display
-```
-Adding places to the tour using the map
-```
-<img src='./static/Mobile_Add_Map.gif'>
-Adding places to the map using name or coordinates and filtering by country or type
-<img src='./static/Mobile_Where_Type.gif'>
-<img src='./static/Mobile_Optimize.gif'>
-<img src='./static/Mobile_500.gif'>
+<div style='display: flex;'>
+    <img src='./static/Mobile_Add_Map.gif' title='Adding to the tour by clicking on the map'>
+    <img src='./static/Mobile_Where_Type.gif' title='Adding places to the tour using place names or coordinates and filtering by country or type'>
+    <img src='./static/Mobile_Optimize.gif' title='Optimizing the tour with places added'>
+    <img src='./static/Mobile_500.gif' title='Optimizing the tour with 500 places by loading in a json file'>
+</div>
+
 
 ## Window Display
-<img src='./static/Mobile_Add_Place.gif'>
-<img src='./static/Mobile_Where_Near.gif'>
-<img src='./static/Mobile_Optimizations.gif'>
-<img src='./static/Mobile_500.gif'>
-<img src='./static/Mobile_Save.gif'>
+<div style='display: flex'>
+    <img src='./static/Window_Add_Place.gif' title='Adding to the tour by clicking on the map'>
+    <img src='./static/Window_Where_Near.gif' title='Adding places to the tour using name or coordinates'>
+    <img src='./static/Window_500.gif' title='Optimizing the tour with 500 places'>
+    <img src='./static/Window_Save.gif' title='Saving the tour as a json and kml file'>
+</div>
 
 ## Project Structure
 ```
