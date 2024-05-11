@@ -37,34 +37,33 @@ For a detailed look at all of these funcationalities, please look below at the M
 ```
 This package includes the following files.
 |--bin  
-    |--clean-local-cache.sh[]  
-    |--run.sh[]  
+    |--clean-local-cache.sh [cleans the directories where pacakages for npm and Maven are installed; cleares cache]  
+    |--run.sh [Runs the app in development mode on localhost using a port for the client and another for the server]  
 |--client  
-    |--schemas[]  
-    |--src[]  
-    |--templates[]  
-    |--test[]  
-    |--package.json[]  
-    |--webpack.config.js[]  
+    |--schemas [contains the response schemas used by the app to respond to http post requests through the API]  
+    |--src [contains all react materials for changing the client UI]  
+    |--templates [contains the main html file]  
+    |--test [tests for client side]  
+    |--package.json [dependeincies for npm]  
+    |--webpack.config.js [config file]  
 |--Postman  
-    |--base.json[]  
-    |--config.json[]  
-    |--distances.json[]  
-    |--find.json[]  
-    |--near.json[]  
-    |--tour.json[]  
+    |--config.json [integration testing for the config api using postman; post to /api/config; tests response sent by the app]  
+    |--distances.json [integration testing for the distances api using postman; post to /api/distances; tests response sent by the app]  
+    |--find.json [integration testing for the find api using postman; post to /api/find; tests response sent by the app]  
+    |--near.json [integration testing for the near api using postman; post to /api/near; tests response sent by the app]  
+    |--tour.json [integration testing for the tour api using postman; post to /api/tour; tests response sent by the app]  
 |--server  
     |--src  
         |--main  
             |--java/com/tco  
-                |--misc[]  
-                |--requests[]  
-                |--server[]  
-            |--resources/schemas  
+                |--misc [defines classes that are used by the various requests to process the actions; includes distance calculators, json validation, optimization algorithms, data structures, database related files, factories, etc.]  
+                |--requests [contains classes for each request registered with the endpoint; uses gson to get the user specified information for processing and send back the the response as a json]  
+                |--server [contains the microserver and web application classes that allow spark to send and receive http requests using a valid port and host]  
+            |--resources/schemas [contains the request json schemas used by the app or user to send a request to the server; used to check if requests are valid] 
         |--test/java/com/tco  
-            |--misc[]  
-            |--requests[]  
-            |--server[]  
+            |--misc [unit testing of files in the misc directory in main using jUnit]  
+            |--requests [unit testing of files in the request directory in main using jUnit]  
+            |--server [unit testing of files in the server directory in main using jUnit]  
     |--pom.xml[config file used for maven]  
 |--static[used for the two videos used for this markdown]  
 |--locations_db.sql[a dump file that can be used to recreate a database with all places used in the app]  
