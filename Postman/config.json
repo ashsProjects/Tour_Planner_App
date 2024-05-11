@@ -1,0 +1,151 @@
+{
+	"info": {
+		"_postman_id": "4857c98b-cd0d-4a64-9ff8-b10649778f28",
+		"name": "config",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_uid": "25883428-4857c98b-cd0d-4a64-9ff8-b10649778f28"
+	},
+	"item": [
+		{
+			"name": "ayushad: Config Post",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "4308a379-296c-4333-97b0-99843f399b52",
+						"exec": [
+							"pm.test(\"Status Test\", function() {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"JSON test\", function() {",
+							"    pm.response.to.be.withBody;",
+							"    pm.response.to.be.json;",
+							"});",
+							"",
+							"pm.test(\"requestType test\", function() {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.requestType).to.equal(\"config\");",
+							"});",
+							"",
+							"pm.test(\"serverName test\", function() {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.serverName).to.be.a(\"string\");",
+							"    pm.expect(jsonData.serverName).to.be.match(/t12 .*/)",
+							"});",
+							"",
+							"pm.test(\"features test\", function() {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.features).to.not.equal(null);",
+							"    pm.expect(jsonData.features).to.contain(\"distances\");",
+							"    pm.expect(jsonData.features).to.contain(\"config\");",
+							"});",
+							"",
+							"pm.test(\"Schema test\", function() {",
+							"    var Ajv = require(\"ajv\");",
+							"    var ajv = new Ajv({logger: console});",
+							"    var schema = {",
+							"        \"properties\": {",
+							"            \"serverName\": {",
+							"                \"type\": \"string\",",
+							"                \"minLength\": 3",
+							"            },",
+							"            \"requestType\": {",
+							"                \"type\": \"string\"",
+							"            },",
+							"            \"features\": {",
+							"                \"type\": \"array\"",
+							"            }",
+							"        }",
+							"    };",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(ajv.validate(schema, jsonData)).to.be.true;",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"id": "8ca7cc5c-eb55-4232-86a7-f6267b1fe90c",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"requestType\": \"config\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/api/config",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"api",
+						"config"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ayushad: Config Invalid",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "6eec0051-e0c1-4991-9f92-732ce2a330d1",
+						"exec": [
+							"pm.test(\"Status test for invalid request to the endpoint\", function() {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"id": "77fab3ee-9e29-4b14-871e-8d212c0f66b8",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"requestType\": \"invalid\",\r\n    \"invalid\": \"true\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/api/config",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"api",
+						"config"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"id": "4eff2874-2ece-4ff9-9f08-c320a2560a8f",
+			"key": "TEAM_NAME",
+			"value": ""
+		}
+	]
+}

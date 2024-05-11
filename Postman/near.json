@@ -1,0 +1,954 @@
+{
+	"info": {
+		"_postman_id": "8e8726eb-bfe4-4f43-b512-1e159a80094d",
+		"name": "near",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_uid": "32907637-8e8726eb-bfe4-4f43-b512-1e159a80094d"
+	},
+	"item": [
+		{
+			"name": "ayushad: 5 nearest places in Tokyo",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "e01bd7ea-0016-4885-811c-4329f6ba9218",
+						"exec": [
+							"pm.test(\"Status Test\", function() {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"JSON test\", function() {",
+							"    pm.response.to.be.withBody;",
+							"    pm.response.to.be.json;",
+							"});",
+							"",
+							"pm.test(\"requestType test\", function() {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.requestType).to.equal(\"near\");",
+							"});",
+							"",
+							"pm.test(\"places test\", function() {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.places).to.not.equal(null);",
+							"    pm.expect(jsonData.places.length).to.equal(5);",
+							"    pm.expect(jsonData.places[0].id).to.equal(\"RJ01\");",
+							"    pm.expect(jsonData.places[1].id).to.equal(\"RJTI\");",
+							"    pm.expect(jsonData.places[2].id).to.equal(\"JP-0002\");",
+							"    pm.expect(jsonData.places[3].id).to.equal(\"JP-0003\");",
+							"    pm.expect(jsonData.places[4].id).to.equal(\"RJTT\");",
+							"});",
+							"",
+							"pm.test(\"distances test\", function() {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.places).to.not.equal(null);",
+							"    pm.expect(jsonData.places.length).to.equal(5);",
+							"    pm.expect(jsonData.distances).to.deep.equal([2, 5, 7, 7, 7]);",
+							"});",
+							"",
+							"pm.test(\"check if all distances are less than distance\", function () {",
+							"     var jsonData = pm.response.json();",
+							"     pm.expect(jsonData).to.be.an('object');",
+							"     jsonData.distances.forEach((dist) => {",
+							"            pm.expect(dist).to.be.lessThan(jsonData.distance);",
+							"     });",
+							"});",
+							"",
+							"pm.test(\"distance test\", function() {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.distance).to.equal(20);",
+							"});",
+							"",
+							"pm.test(\"Schema test\", function() {",
+							"    var Ajv = require(\"ajv\");",
+							"    var ajv = new Ajv({logger: console});",
+							"    var schema = {",
+							"        \"properties\": {",
+							"            \"requestType\": {",
+							"                \"type\": \"string\"",
+							"            },",
+							"            \"earthRadius\": {",
+							"                \"type\": \"number\"",
+							"            },",
+							"            \"places\": {",
+							"                \"type\": \"array\"",
+							"            },",
+							"            \"response\": {",
+							"                \"type\": \"number\"",
+							"            }",
+							"        }",
+							"    };",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(ajv.validate(schema, jsonData)).to.be.true;",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"id": "daeb33b7-dd19-41a9-aeaa-a95f3af1ece1",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"requestType\": \"near\",\n    \"place\": {\n      \"latitude\": \"35.65\",\n      \"longitude\": \"139.75\"\n    },\n    \"distance\": 20,\n    \"earthRadius\": 3959,\n    \"limit\": 5\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/api/near",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"api",
+						"near"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ayushad: near in Oslo",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "e01bd7ea-0016-4885-811c-4329f6ba9218",
+						"exec": [
+							"pm.test(\"Status Test\", function() {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"JSON test\", function() {",
+							"    pm.response.to.be.withBody;",
+							"    pm.response.to.be.json;",
+							"});",
+							"",
+							"pm.test(\"requestType test\", function() {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.requestType).to.equal(\"near\");",
+							"});",
+							"",
+							"pm.test(\"distances test\", function() {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.places).to.not.equal(null);",
+							"    pm.expect(jsonData.places.length).to.equal(18);",
+							"});",
+							"",
+							"pm.test(\"check if all distances are less than distance\", function () {",
+							"     var jsonData = pm.response.json();",
+							"     pm.expect(jsonData).to.be.an('object');",
+							"     jsonData.distances.forEach((dist) => {",
+							"            pm.expect(dist).to.be.lessThan(jsonData.distance+1);",
+							"     });",
+							"});",
+							"",
+							"pm.test(\"distance test\", function() {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.distance).to.equal(50);",
+							"});",
+							"",
+							"pm.test(\"Schema test\", function() {",
+							"    var Ajv = require(\"ajv\");",
+							"    var ajv = new Ajv({logger: console});",
+							"    var schema = {",
+							"        \"properties\": {",
+							"            \"requestType\": {",
+							"                \"type\": \"string\"",
+							"            },",
+							"            \"earthRadius\": {",
+							"                \"type\": \"number\"",
+							"            },",
+							"            \"places\": {",
+							"                \"type\": \"array\"",
+							"            },",
+							"            \"response\": {",
+							"                \"type\": \"number\"",
+							"            }",
+							"        }",
+							"    };",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(ajv.validate(schema, jsonData)).to.be.true;",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"id": "f6042993-35c5-4943-b26f-5ec3f5e53fec",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"requestType\": \"near\",\n    \"place\": {\n      \"latitude\": \"60\",\n      \"longitude\": \"11\"\n    },\n    \"distance\": 50,\n    \"earthRadius\": 6371,\n    \"limit\": 100\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/api/near",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"api",
+						"near"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ayushad: Date Line 7 places",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "e01bd7ea-0016-4885-811c-4329f6ba9218",
+						"exec": [
+							"pm.test(\"Status Test\", function() {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"JSON test\", function() {",
+							"    pm.response.to.be.withBody;",
+							"    pm.response.to.be.json;",
+							"});",
+							"",
+							"pm.test(\"requestType test\", function() {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.requestType).to.equal(\"near\");",
+							"});",
+							"",
+							"pm.test(\"distances test\", function() {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.places).to.not.equal(null);",
+							"    pm.expect(jsonData.places.length).to.equal(7);",
+							"});",
+							"",
+							"pm.test(\"check if sum of values in distances equal to 254\", function() {",
+							"    var jsonData = pm.response.json();",
+							"    let sum = jsonData.distances.reduce(function(sum, num) {",
+							"        return sum + num;",
+							"    });",
+							"    pm.expect(sum).to.equal(254);",
+							"});",
+							"",
+							"pm.test(\"check if all distances are less than distance\", function () {",
+							"     var jsonData = pm.response.json();",
+							"     pm.expect(jsonData).to.be.an('object');",
+							"     jsonData.distances.forEach((dist) => {",
+							"            pm.expect(dist).to.be.lessThan(jsonData.distance+1);",
+							"     });",
+							"});",
+							"",
+							"pm.test(\"distance test\", function() {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.distance).to.equal(50);",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"id": "e3d80097-e6ff-403d-bb3a-46e6ad3ee75c",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"requestType\": \"near\",\n    \"place\": {\n      \"latitude\": \"-17\",\n      \"longitude\": \"180\"\n    },\n    \"distance\": 50,\n    \"earthRadius\": 3959,\n    \"limit\": 100\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/api/near",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"api",
+						"near"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ayushad: near the pole",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "e01bd7ea-0016-4885-811c-4329f6ba9218",
+						"exec": [
+							"pm.test(\"Status Test\", function() {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"JSON test\", function() {",
+							"    pm.response.to.be.withBody;",
+							"    pm.response.to.be.json;",
+							"});",
+							"",
+							"pm.test(\"requestType test\", function() {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.requestType).to.equal(\"near\");",
+							"});",
+							"",
+							"pm.test(\"distances test\", function() {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.places).to.not.equal(null);",
+							"    pm.expect(jsonData.places.length).to.equal(1);",
+							"});",
+							"",
+							"pm.test(\"check if sum of values in distances equal to 35\", function() {",
+							"    var jsonData = pm.response.json();",
+							"    let sum = jsonData.distances.reduce(function(sum, num) {",
+							"        return sum + num;",
+							"    });",
+							"    pm.expect(sum).to.equal(35);",
+							"});",
+							"",
+							"pm.test(\"check if all distances are less than distance\", function () {",
+							"     var jsonData = pm.response.json();",
+							"     pm.expect(jsonData).to.be.an('object');",
+							"     jsonData.distances.forEach((dist) => {",
+							"            pm.expect(dist).to.be.lessThan(jsonData.distance+1);",
+							"     });",
+							"});",
+							"",
+							"pm.test(\"distance test\", function() {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.distance).to.equal(50);",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"id": "987ee363-1ac4-4a73-bd83-b9abab720236",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"requestType\": \"near\",\n    \"place\": {\n      \"latitude\": \"-89.5\",\n      \"longitude\": \"0\"\n    },\n    \"distance\": 50,\n    \"earthRadius\": 3959,\n    \"limit\": 100\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/api/near",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"api",
+						"near"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ayushad: near in NYC",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "e01bd7ea-0016-4885-811c-4329f6ba9218",
+						"exec": [
+							"pm.test(\"Status Test\", function() {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"JSON test\", function() {",
+							"    pm.response.to.be.withBody;",
+							"    pm.response.to.be.json;",
+							"});",
+							"",
+							"pm.test(\"requestType test\", function() {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.requestType).to.equal(\"near\");",
+							"});",
+							"",
+							"pm.test(\"distances test\", function() {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.places).to.not.equal(null);",
+							"    pm.expect(jsonData.places.length).to.equal(100);",
+							"});",
+							"",
+							"pm.test(\"check if all distances are less than distance\", function () {",
+							"     var jsonData = pm.response.json();",
+							"     pm.expect(jsonData).to.be.an('object');",
+							"     jsonData.distances.forEach((dist) => {",
+							"            pm.expect(dist).to.be.lessThan(jsonData.distance+1);",
+							"     });",
+							"});",
+							"",
+							"pm.test(\"distance test\", function() {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.distance).to.equal(50);",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"id": "87f31a99-daa9-438d-a3b6-9b78e88188f7",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"requestType\": \"near\",\n    \"place\": {\n      \"latitude\": \"40.70075\",\n      \"longitude\": \"-74.0086\"\n    },\n    \"distance\": 50,\n    \"earthRadius\": 3959,\n    \"limit\": 100\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/api/near",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"api",
+						"near"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ayushad: near rural",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "e01bd7ea-0016-4885-811c-4329f6ba9218",
+						"exec": [
+							"pm.test(\"Status Test\", function() {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"JSON test\", function() {",
+							"    pm.response.to.be.withBody;",
+							"    pm.response.to.be.json;",
+							"});",
+							"",
+							"pm.test(\"requestType test\", function() {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.requestType).to.equal(\"near\");",
+							"});",
+							"",
+							"pm.test(\"places test\", function() {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.places).to.not.equal(null);",
+							"    pm.expect(jsonData.places.length).to.equal(2);",
+							"    pm.expect(jsonData.places[0].id).to.equal(\"0SD4\");",
+							"    pm.expect(jsonData.places[1].id).to.equal(\"KBKX\");",
+							"});",
+							"",
+							"pm.test(\"distances test\", function() {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.places).to.not.equal(null);",
+							"    pm.expect(jsonData.places.length).to.equal(2);",
+							"    pm.expect(jsonData.distances).to.deep.equal([1, 2]);",
+							"});",
+							"",
+							"pm.test(\"distance test\", function() {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.distance).to.equal(2);",
+							"});",
+							"",
+							"pm.test(\"Schema test\", function() {",
+							"    var Ajv = require(\"ajv\");",
+							"    var ajv = new Ajv({logger: console});",
+							"    var schema = {",
+							"        \"properties\": {",
+							"            \"requestType\": {",
+							"                \"type\": \"string\"",
+							"            },",
+							"            \"earthRadius\": {",
+							"                \"type\": \"number\"",
+							"            },",
+							"            \"places\": {",
+							"                \"type\": \"array\"",
+							"            },",
+							"            \"response\": {",
+							"                \"type\": \"number\"",
+							"            }",
+							"        }",
+							"    };",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(ajv.validate(schema, jsonData)).to.be.true;",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"id": "e0fefb7a-12e5-4e6d-90e8-e39630e7da2c",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"requestType\": \"near\",\n    \"place\": {\n      \"latitude\": \"44.302222\",\n      \"longitude\": \"-96.786111\"\n    },\n    \"distance\": 2,\n    \"earthRadius\": 3959,\n    \"limit\": 5\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/api/near",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"api",
+						"near"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ayushad: 5 nearest places in km",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "e01bd7ea-0016-4885-811c-4329f6ba9218",
+						"exec": [
+							"pm.test(\"Status Test\", function() {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"JSON test\", function() {",
+							"    pm.response.to.be.withBody;",
+							"    pm.response.to.be.json;",
+							"});",
+							"",
+							"pm.test(\"requestType test\", function() {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.requestType).to.equal(\"near\");",
+							"});",
+							"",
+							"pm.test(\"places test\", function() {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.places).to.not.equal(null);",
+							"    pm.expect(jsonData.places.length).to.equal(5);",
+							"    pm.expect(jsonData.places[0].id).to.equal(\"RJ01\");",
+							"    pm.expect(jsonData.places[1].id).to.equal(\"RJTI\");",
+							"    pm.expect(jsonData.places[2].id).to.equal(\"JP-0002\");",
+							"    pm.expect(jsonData.places[3].id).to.equal(\"JP-0003\");",
+							"    pm.expect(jsonData.places[4].id).to.equal(\"RJTT\");",
+							"});",
+							"",
+							"pm.test(\"distances test\", function() {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.places).to.not.equal(null);",
+							"    pm.expect(jsonData.places.length).to.equal(5);",
+							"    pm.expect(jsonData.distances).to.deep.equal([3, 8, 11, 11, 11]);",
+							"});",
+							"",
+							"pm.test(\"check if all distances are less than distance\", function () {",
+							"     var jsonData = pm.response.json();",
+							"     pm.expect(jsonData).to.be.an('object');",
+							"     jsonData.distances.forEach((dist) => {",
+							"            pm.expect(dist).to.be.lessThan(jsonData.distance);",
+							"     });",
+							"});",
+							"",
+							"pm.test(\"distance test\", function() {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.distance).to.equal(20);",
+							"});",
+							"",
+							"pm.test(\"Schema test\", function() {",
+							"    var Ajv = require(\"ajv\");",
+							"    var ajv = new Ajv({logger: console});",
+							"    var schema = {",
+							"        \"properties\": {",
+							"            \"requestType\": {",
+							"                \"type\": \"string\"",
+							"            },",
+							"            \"earthRadius\": {",
+							"                \"type\": \"number\"",
+							"            },",
+							"            \"places\": {",
+							"                \"type\": \"array\"",
+							"            },",
+							"            \"response\": {",
+							"                \"type\": \"number\"",
+							"            }",
+							"        }",
+							"    };",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(ajv.validate(schema, jsonData)).to.be.true;",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"id": "bc786a2e-6661-4e24-8261-b31eca2e20f9",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"requestType\": \"near\",\n    \"place\": {\n      \"latitude\": \"35.65\",\n      \"longitude\": \"139.75\"\n    },\n    \"distance\": 20,\n    \"earthRadius\": 6371,\n    \"limit\": 5\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/api/near",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"api",
+						"near"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ayushad: Date line",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "e01bd7ea-0016-4885-811c-4329f6ba9218",
+						"exec": [
+							"pm.test(\"Status Test\", function() {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"places test\", function() {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.places).to.not.equal(null);",
+							"    pm.expect(jsonData.places.length).to.equal(5);",
+							"    pm.expect(jsonData.places[0].id).to.equal(\"NFVB\");",
+							"    pm.expect(jsonData.places[1].id).to.equal(\"NFKB\");",
+							"    pm.expect(jsonData.places[2].id).to.equal(\"NFNH\");",
+							"    pm.expect(jsonData.places[3].id).to.equal(\"NFCI\");",
+							"    pm.expect(jsonData.places[4].id).to.equal(\"NFNM\");",
+							"});",
+							"",
+							"pm.test(\"distances test\", function() {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.places).to.not.equal(null);",
+							"    pm.expect(jsonData.places.length).to.equal(5);",
+							"    pm.expect(jsonData.distances).to.deep.equal([5, 9, 12, 14, 16]);",
+							"});",
+							"",
+							"pm.test(\"check if all distances are less than distance\", function () {",
+							"     var jsonData = pm.response.json();",
+							"     pm.expect(jsonData).to.be.an('object');",
+							"     jsonData.distances.forEach((dist) => {",
+							"            pm.expect(dist).to.be.lessThan(jsonData.distance);",
+							"     });",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"id": "35c7fdba-79f5-417a-aa0c-fa7984d9b7c8",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"requestType\": \"near\",\n    \"place\": {\n      \"latitude\": \"-17.00\",\n      \"longitude\": \"-179.00\"\n    },\n    \"distance\": 50,\n    \"earthRadius\": 1000,\n    \"limit\": 5\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/api/near",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"api",
+						"near"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ayushad: 2 Nearest places to an airport",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "05dbc816-b103-4431-8a4a-9393e5e866bc",
+						"exec": [
+							"pm.test(\"Status Test\", function() {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"JSON test\", function() {",
+							"    pm.response.to.be.withBody;",
+							"    pm.response.to.be.json;",
+							"});",
+							"",
+							"pm.test(\"requestType test\", function() {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.requestType).to.equal(\"near\");",
+							"});",
+							"",
+							"pm.test(\"places test\", function() {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.places).to.not.equal(null);",
+							"    pm.expect(jsonData.places.length).to.equal(2);",
+							"    pm.expect(jsonData.places[0].id).to.equal(\"2CD2\");",
+							"    pm.expect(jsonData.places[1].id).to.equal(\"5CO2\");",
+							"});",
+							"",
+							"pm.test(\"distances test\", function() {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.places).to.not.equal(null);",
+							"    pm.expect(jsonData.places.length).to.equal(2);",
+							"    pm.expect(jsonData.distances).to.deep.equal([5, 5]);",
+							"});",
+							"",
+							"pm.test(\"check if all distances are less than distance\", function () {",
+							"     var jsonData = pm.response.json();",
+							"     pm.expect(jsonData).to.be.an('object');",
+							"     jsonData.distances.forEach((dist) => {",
+							"            pm.expect(dist).to.be.lessThan(jsonData.distance);",
+							"     });",
+							"});",
+							"",
+							"pm.test(\"distance test\", function() {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.distance).to.equal(50);",
+							"});",
+							"",
+							"pm.test(\"Schema test\", function() {",
+							"    var Ajv = require(\"ajv\");",
+							"    var ajv = new Ajv({logger: console});",
+							"    var schema = {",
+							"        \"properties\": {",
+							"            \"requestType\": {",
+							"                \"type\": \"string\"",
+							"            },",
+							"            \"earthRadius\": {",
+							"                \"type\": \"number\"",
+							"            },",
+							"            \"places\": {",
+							"                \"type\": \"array\"",
+							"            },",
+							"            \"response\": {",
+							"                \"type\": \"number\"",
+							"            }",
+							"        }",
+							"    };",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(ajv.validate(schema, jsonData)).to.be.true;",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"id": "2102e60b-f766-4fad-bbef-17acd9ee0c50",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"requestType\": \"near\",\n    \"place\": {\"latitude\": \"40.3479995728\", \"longitude\": \"-104.9844228\"},\n    \"distance\": 50,\n    \"earthRadius\": 3959,\n    \"limit\": 2\n}\n\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/api/near",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"api",
+						"near"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ayushad: Nearest places with distance 0",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "05dbc816-b103-4431-8a4a-9393e5e866bc",
+						"exec": [
+							"pm.test(\"Status Test\", function() {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"JSON test\", function() {",
+							"    pm.response.to.be.withBody;",
+							"    pm.response.to.be.json;",
+							"});",
+							"",
+							"pm.test(\"requestType test\", function() {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.requestType).to.equal(\"near\");",
+							"});",
+							"",
+							"pm.test(\"places test\", function() {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.places).to.not.equal(null);",
+							"    pm.expect(jsonData.places.length).to.equal(2);",
+							"    pm.expect(jsonData.places[0].id).to.equal(\"2CD2\");",
+							"    pm.expect(jsonData.places[1].id).to.equal(\"5CO2\");",
+							"});",
+							"",
+							"pm.test(\"distances test\", function() {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.places).to.not.equal(null);",
+							"    pm.expect(jsonData.places.length).to.equal(2);",
+							"    pm.expect(jsonData.distances).to.deep.equal([5, 5]);",
+							"});",
+							"",
+							"pm.test(\"check if all distances are less than distance\", function () {",
+							"     var jsonData = pm.response.json();",
+							"     pm.expect(jsonData).to.be.an('object');",
+							"     jsonData.distances.forEach((dist) => {",
+							"            pm.expect(dist).to.be.lessThan(jsonData.distance);",
+							"     });",
+							"});",
+							"",
+							"pm.test(\"distance test\", function() {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.distance).to.equal(50);",
+							"});",
+							"",
+							"pm.test(\"Schema test\", function() {",
+							"    var Ajv = require(\"ajv\");",
+							"    var ajv = new Ajv({logger: console});",
+							"    var schema = {",
+							"        \"properties\": {",
+							"            \"requestType\": {",
+							"                \"type\": \"string\"",
+							"            },",
+							"            \"earthRadius\": {",
+							"                \"type\": \"number\"",
+							"            },",
+							"            \"places\": {",
+							"                \"type\": \"array\"",
+							"            },",
+							"            \"response\": {",
+							"                \"type\": \"number\"",
+							"            }",
+							"        }",
+							"    };",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(ajv.validate(schema, jsonData)).to.be.true;",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"id": "be235d93-deec-4176-93d8-c81bd27d9d3d",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"requestType\": \"near\",\n    \"place\": {\"latitude\": \"40.3479995728\", \"longitude\": \"-104.9844228\"},\n    \"distance\": 50,\n    \"earthRadius\": 3959,\n    \"limit\": 2\n}\n\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/api/near",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"api",
+						"near"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

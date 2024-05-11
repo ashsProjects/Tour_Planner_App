@@ -1,0 +1,1612 @@
+{
+	"info": {
+		"_postman_id": "5687ac03-db32-4429-97ae-76748e821e21",
+		"name": "tour",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_uid": "25883428-5687ac03-db32-4429-97ae-76748e821e21"
+	},
+	"item": [
+		{
+			"name": "ayushad: Response Missing",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "2a3e65df-0e40-4dfa-9d7d-bed4d4e394bc",
+						"exec": [
+							"pm.test(\"Response is HTTP400 status\", () => {",
+							"    pm.response.to.have.status(400);",
+							"});",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"id": "abc3974a-eb10-4d58-8147-554dd1b7a06a",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"requestType\": \"tour\",\n    \"earthRadius\": 1234,\n    \"places\": []\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/api/tour",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"api",
+						"tour"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ayushad: Negative Response Value",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "2a3e65df-0e40-4dfa-9d7d-bed4d4e394bc",
+						"exec": [
+							"pm.test(\"Response is HTTP400 status\", () => {",
+							"    pm.response.to.have.status(400);",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"id": "7a85bc84-c82b-4e69-8052-06a12a9b761d",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"requestType\": \"tour\",\n    \"earthRadius\": 1234,\n    \"response\": -1,\n    \"places\": []\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/api/tour",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"api",
+						"tour"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ayushad: Star to Pentagon",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "2a3e65df-0e40-4dfa-9d7d-bed4d4e394bc",
+						"exec": [
+							"pm.test(\"Status Test\", function() {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"JSON test\", function() {",
+							"    pm.response.to.be.withBody;",
+							"    pm.response.to.be.json;",
+							"});",
+							"",
+							"pm.test(\"requestType test\", function() {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.requestType).to.equal(\"tour\");",
+							"});",
+							"",
+							"pm.test(\"earthRadius test\", function() {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.earthRadius).to.equal(1234)",
+							"});",
+							"",
+							"pm.test(\"places test\", function() {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.places).to.not.equal(null);",
+							"    console.log(jsonData.places[2]);",
+							"    pm.expect(jsonData.places[0]).to.deep.equal({\"latitude\": \"44.98\", \"longitude\": \"-112.15\"});",
+							"    pm.expect(jsonData.places[1]).to.deep.equal({\"latitude\": \"51.63\", \"longitude\": \"-106.35\"});",
+							"    pm.expect(jsonData.places[2]).to.deep.equal({\"latitude\": \"46.33\", \"longitude\": \"-92.99\"});",
+							"    pm.expect(jsonData.places[3]).to.deep.equal({\"latitude\": \"37.30\", \"longitude\": \"-94.92\"});",
+							"    pm.expect(jsonData.places[4]).to.deep.equal({\"latitude\": \"35.60\", \"longitude\": \"-111.27\"});",
+							"});",
+							"",
+							"pm.test(\"Schema test\", function() {",
+							"    var Ajv = require(\"ajv\");",
+							"    var ajv = new Ajv({logger: console});",
+							"    var schema = {",
+							"        \"properties\": {",
+							"            \"requestType\": {",
+							"                \"type\": \"string\"",
+							"            },",
+							"            \"earthRadius\": {",
+							"                \"type\": \"number\"",
+							"            },",
+							"            \"places\": {",
+							"                \"type\": \"array\"",
+							"            },",
+							"            \"response\": {",
+							"                \"type\": \"number\"",
+							"            }",
+							"        }",
+							"    };",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(ajv.validate(schema, jsonData)).to.be.true;",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"id": "b5c23106-ed4d-433d-adcc-1088bfa09f0e",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"requestType\": \"tour\",\n    \"earthRadius\": 1234,\n    \"response\": 0.1,\n    \"places\": [\n        {\n            \"latitude\": \"44.98\",\n            \"longitude\": \"-112.15\"\n        },\n        {\n            \"latitude\": \"46.33\",\n            \"longitude\": \"-92.99\"\n        },\n        {\n            \"latitude\": \"35.60\",\n            \"longitude\": \"-111.27\"\n        },\n        {\n            \"latitude\": \"51.63\",\n            \"longitude\": \"-106.35\"\n        },\n        {\n            \"latitude\": \"37.30\",\n            \"longitude\": \"-94.92\"\n        }\n    ]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/api/tour",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"api",
+						"tour"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ayushad: 8 to Rectangle",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "2a3e65df-0e40-4dfa-9d7d-bed4d4e394bc",
+						"exec": [
+							"pm.test(\"Status Test\", function() {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"JSON test\", function() {",
+							"    pm.response.to.be.withBody;",
+							"    pm.response.to.be.json;",
+							"});",
+							"",
+							"pm.test(\"requestType test\", function() {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.requestType).to.equal(\"tour\");",
+							"});",
+							"",
+							"pm.test(\"earthRadius test\", function() {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.earthRadius).to.equal(1234)",
+							"});",
+							"",
+							"pm.test(\"places test\", function() {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.places).to.not.equal(null);",
+							"    pm.expect(jsonData.places[0]).to.deep.equal({\"latitude\": \"44.09\", \"longitude\": \"-108.46\"});",
+							"    pm.expect(jsonData.places[1]).to.deep.equal({\"latitude\": \"33.28\", \"longitude\": \"-105.82\"});",
+							"    pm.expect(jsonData.places[2]).to.deep.equal({\"latitude\": \"35.32\", \"longitude\": \"-86.84\"});",
+							"    pm.expect(jsonData.places[3]).to.deep.equal({\"latitude\": \"45.23\", \"longitude\": \"-90.18\"});",
+							"});",
+							"",
+							"pm.test(\"Schema test\", function() {",
+							"    var Ajv = require(\"ajv\");",
+							"    var ajv = new Ajv({logger: console});",
+							"    var schema = {",
+							"        \"properties\": {",
+							"            \"requestType\": {",
+							"                \"type\": \"string\"",
+							"            },",
+							"            \"earthRadius\": {",
+							"                \"type\": \"number\"",
+							"            },",
+							"            \"places\": {",
+							"                \"type\": \"array\"",
+							"            },",
+							"            \"response\": {",
+							"                \"type\": \"number\"",
+							"            }",
+							"        }",
+							"    };",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(ajv.validate(schema, jsonData)).to.be.true;",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"id": "b397fa7f-221c-4d84-97b4-e677d8d7f9f8",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"requestType\": \"tour\",\n    \"earthRadius\": 1234,\n    \"response\": 0.1,\n    \"places\": [\n        {\n            \"latitude\": \"44.09\",\n            \"longitude\": \"-108.46\"\n        },\n        {\n            \"latitude\": \"45.23\",\n            \"longitude\": \"-90.18\"\n        },\n        {\n            \"latitude\": \"33.28\",\n            \"longitude\": \"-105.82\"\n        },\n        {\n            \"latitude\": \"35.32\",\n            \"longitude\": \"-86.84\"\n        }\n    ]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/api/tour",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"api",
+						"tour"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ayushad: ACDBE to Pentagon",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "2a3e65df-0e40-4dfa-9d7d-bed4d4e394bc",
+						"exec": [
+							"pm.test(\"Status Test\", function() {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"JSON test\", function() {",
+							"    pm.response.to.be.withBody;",
+							"    pm.response.to.be.json;",
+							"});",
+							"",
+							"pm.test(\"requestType test\", function() {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.requestType).to.equal(\"tour\");",
+							"});",
+							"",
+							"pm.test(\"earthRadius test\", function() {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.earthRadius).to.equal(1234)",
+							"});",
+							"",
+							"pm.test(\"places test\", function() {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.places).to.not.equal(null);",
+							"    pm.expect(jsonData.places[0]).to.deep.equal({\"latitude\": \"47.88\", \"longitude\": \"-100.02\"});",
+							"    pm.expect(jsonData.places[1]).to.deep.equal({\"latitude\": \"43.46\", \"longitude\": \"-108.46\"});",
+							"    pm.expect(jsonData.places[2]).to.deep.equal({\"latitude\": \"34.73\", \"longitude\": \"-106.70\"});",
+							"    pm.expect(jsonData.places[3]).to.deep.equal({\"latitude\": \"36.45\", \"longitude\": \"-93.34\"});",
+							"    pm.expect(jsonData.places[4]).to.deep.equal({\"latitude\": \"43.46\", \"longitude\": \"-91.58\"});",
+							"});",
+							"",
+							"pm.test(\"Schema test\", function() {",
+							"    var Ajv = require(\"ajv\");",
+							"    var ajv = new Ajv({logger: console});",
+							"    var schema = {",
+							"        \"properties\": {",
+							"            \"requestType\": {",
+							"                \"type\": \"string\"",
+							"            },",
+							"            \"earthRadius\": {",
+							"                \"type\": \"number\"",
+							"            },",
+							"            \"places\": {",
+							"                \"type\": \"array\"",
+							"            },",
+							"            \"response\": {",
+							"                \"type\": \"number\"",
+							"            }",
+							"        }",
+							"    };",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(ajv.validate(schema, jsonData)).to.be.true;",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"id": "86b83a24-36e8-41f0-a4c6-e6eedb83edea",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"requestType\": \"tour\",\n    \"earthRadius\": 1234,\n    \"response\": 0.1,\n    \"formula\": \"cosines\",\n    \"places\": [\n        {\n            \"latitude\": \"47.88\",\n            \"longitude\": \"-100.02\"\n        },\n        {\n            \"latitude\": \"34.73\",\n            \"longitude\": \"-106.70\"\n        },\n        {\n            \"latitude\": \"36.45\",\n            \"longitude\": \"-93.34\"\n        },\n        {\n            \"latitude\": \"43.46\",\n            \"longitude\": \"-108.46\"\n        },\n        {\n            \"latitude\": \"43.46\",\n            \"longitude\": \"-91.58\"\n        }\n    ]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/api/tour",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"api",
+						"tour"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ayushad: ACDEB to Pentagon",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "2a3e65df-0e40-4dfa-9d7d-bed4d4e394bc",
+						"exec": [
+							"pm.test(\"Status Test\", function() {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"JSON test\", function() {",
+							"    pm.response.to.be.withBody;",
+							"    pm.response.to.be.json;",
+							"});",
+							"",
+							"pm.test(\"requestType test\", function() {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.requestType).to.equal(\"tour\");",
+							"});",
+							"",
+							"pm.test(\"earthRadius test\", function() {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.earthRadius).to.equal(1234)",
+							"});",
+							"",
+							"pm.test(\"places test\", function() {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.places).to.not.equal(null);",
+							"    pm.expect(jsonData.places[0]).to.deep.equal({\"latitude\": \"48.58\", \"longitude\": \"-101.43\"});",
+							"    pm.expect(jsonData.places[1]).to.deep.equal({\"latitude\": \"44.72\", \"longitude\": \"-111.62\"});",
+							"    pm.expect(jsonData.places[2]).to.deep.equal({\"latitude\": \"38.13\", \"longitude\": \"-113.38\"});",
+							"    pm.expect(jsonData.places[3]).to.deep.equal({\"latitude\": \"36.59\", \"longitude\": \"-93.87\"});",
+							"    pm.expect(jsonData.places[4]).to.deep.equal({\"latitude\": \"47.76\", \"longitude\": \"-86.13\"});",
+							"});",
+							"",
+							"pm.test(\"Schema test\", function() {",
+							"    var Ajv = require(\"ajv\");",
+							"    var ajv = new Ajv({logger: console});",
+							"    var schema = {",
+							"        \"properties\": {",
+							"            \"requestType\": {",
+							"                \"type\": \"string\"",
+							"            },",
+							"            \"earthRadius\": {",
+							"                \"type\": \"number\"",
+							"            },",
+							"            \"places\": {",
+							"                \"type\": \"array\"",
+							"            },",
+							"            \"response\": {",
+							"                \"type\": \"number\"",
+							"            }",
+							"        }",
+							"    };",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(ajv.validate(schema, jsonData)).to.be.true;",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"id": "f1b7adaf-47d5-4801-bac4-89285aa1b4a2",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"requestType\": \"tour\",\n    \"earthRadius\": 1234,\n    \"response\": 0.1,\n    \"formula\": \"haversine\",\n    \"places\": [\n        {\n            \"latitude\": \"48.58\",\n            \"longitude\": \"-101.43\"\n        },\n        {\n            \"latitude\": \"44.72\",\n            \"longitude\": \"-111.62\"\n        },\n        {\n            \"latitude\": \"47.76\",\n            \"longitude\": \"-86.13\"\n        },\n        {\n            \"latitude\": \"36.59\",\n            \"longitude\": \"-93.87\"\n        },\n        {\n            \"latitude\": \"38.13\",\n            \"longitude\": \"-113.38\"\n        }\n    ]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/api/tour",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"api",
+						"tour"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ayushad: ADCBEF to Hexagon",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "2a3e65df-0e40-4dfa-9d7d-bed4d4e394bc",
+						"exec": [
+							"pm.test(\"Status Test\", function() {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"JSON test\", function() {",
+							"    pm.response.to.be.withBody;",
+							"    pm.response.to.be.json;",
+							"});",
+							"",
+							"pm.test(\"requestType test\", function() {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.requestType).to.equal(\"tour\");",
+							"});",
+							"",
+							"pm.test(\"earthRadius test\", function() {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.earthRadius).to.equal(1234)",
+							"});",
+							"",
+							"pm.test(\"places test\", function() {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.places).to.not.equal(null);",
+							"    pm.expect(jsonData.places[0]).to.deep.equal({\"latitude\": \"32.83\", \"longitude\": \"-93.52\"});",
+							"    pm.expect(jsonData.places[1]).to.deep.equal({\"latitude\": \"40.04\", \"longitude\": \"-87.89\"});",
+							"    pm.expect(jsonData.places[2]).to.deep.equal({\"latitude\": \"46.20\", \"longitude\": \"-94.04\"});",
+							"    pm.expect(jsonData.places[3]).to.deep.equal({\"latitude\": \"45.34\", \"longitude\": \"-105.29\"});",
+							"    pm.expect(jsonData.places[4]).to.deep.equal({\"latitude\": \"38.41\", \"longitude\": \"-113.03\"});",
+							"    pm.expect(jsonData.places[5]).to.deep.equal({\"latitude\": \"30.59\", \"longitude\": \"-107.05\"});",
+							"});",
+							"",
+							"pm.test(\"Schema test\", function() {",
+							"    var Ajv = require(\"ajv\");",
+							"    var ajv = new Ajv({logger: console});",
+							"    var schema = {",
+							"        \"properties\": {",
+							"            \"requestType\": {",
+							"                \"type\": \"string\"",
+							"            },",
+							"            \"earthRadius\": {",
+							"                \"type\": \"number\"",
+							"            },",
+							"            \"places\": {",
+							"                \"type\": \"array\"",
+							"            },",
+							"            \"response\": {",
+							"                \"type\": \"number\"",
+							"            }",
+							"        }",
+							"    };",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(ajv.validate(schema, jsonData)).to.be.true;",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"id": "799c5f55-72f8-4dd9-85c5-f628c734e7ef",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"requestType\": \"tour\",\n    \"earthRadius\": 1234,\n    \"response\": 0.1,\n    \"formula\": \"vincenty\",\n    \"places\": [\n        {\n            \"latitude\": \"32.83\",\n            \"longitude\": \"-93.52\"\n        },\n        {\n            \"latitude\": \"40.04\",\n            \"longitude\": \"-87.89\"\n        },\n        {\n            \"latitude\": \"30.59\",\n            \"longitude\": \"-107.05\"\n        },\n        {\n            \"latitude\": \"38.41\",\n            \"longitude\": \"-113.03\"\n        },\n        {\n            \"latitude\": \"45.34\",\n            \"longitude\": \"-105.29\"\n        },\n        {\n            \"latitude\": \"46.20\",\n            \"longitude\": \"-94.04\"\n        }\n    ]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/api/tour",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"api",
+						"tour"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ayushad: ACBDEF to Hexagon",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "2a3e65df-0e40-4dfa-9d7d-bed4d4e394bc",
+						"exec": [
+							"pm.test(\"Status Test\", function() {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"JSON test\", function() {",
+							"    pm.response.to.be.withBody;",
+							"    pm.response.to.be.json;",
+							"});",
+							"",
+							"pm.test(\"requestType test\", function() {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.requestType).to.equal(\"tour\");",
+							"});",
+							"",
+							"pm.test(\"earthRadius test\", function() {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.earthRadius).to.equal(1234)",
+							"});",
+							"",
+							"pm.test(\"places test\", function() {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.places).to.not.equal(null);",
+							"    pm.expect(jsonData.places[0]).to.deep.equal({\"latitude\": \"40.98\", \"longitude\": \"-113.38\"});",
+							"    pm.expect(jsonData.places[1]).to.deep.equal({\"latitude\": \"47.88\", \"longitude\": \"-108.28\"});",
+							"    pm.expect(jsonData.places[2]).to.deep.equal({\"latitude\": \"47.76\", \"longitude\": \"-92.81\"});",
+							"    pm.expect(jsonData.places[3]).to.deep.equal({\"latitude\": \"41.64\", \"longitude\": \"-87.71\"});",
+							"    pm.expect(jsonData.places[4]).to.deep.equal({\"latitude\": \"35.88\", \"longitude\": \"-91.41\"});",
+							"    pm.expect(jsonData.places[5]).to.deep.equal({\"latitude\": \"35.74\", \"longitude\": \"-105.64\"});",
+							"});",
+							"",
+							"pm.test(\"Schema test\", function() {",
+							"    var Ajv = require(\"ajv\");",
+							"    var ajv = new Ajv({logger: console});",
+							"    var schema = {",
+							"        \"properties\": {",
+							"            \"requestType\": {",
+							"                \"type\": \"string\"",
+							"            },",
+							"            \"earthRadius\": {",
+							"                \"type\": \"number\"",
+							"            },",
+							"            \"places\": {",
+							"                \"type\": \"array\"",
+							"            },",
+							"            \"response\": {",
+							"                \"type\": \"number\"",
+							"            }",
+							"        }",
+							"    };",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(ajv.validate(schema, jsonData)).to.be.true;",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"id": "daa7110d-47eb-4c4d-9528-903519287b12",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"requestType\": \"tour\",\n    \"earthRadius\": 1234,\n    \"response\": 0.1,\n    \"places\": [\n        {\n            \"latitude\": \"40.98\",\n            \"longitude\": \"-113.38\"\n        },\n        {\n            \"latitude\": \"47.88\",\n            \"longitude\": \"-108.28\"\n        },\n        {\n            \"latitude\": \"35.88\",\n            \"longitude\": \"-91.41\"\n        },\n        {\n            \"latitude\": \"41.64\",\n            \"longitude\": \"-87.71\"\n        },\n        {\n            \"latitude\": \"47.76\",\n            \"longitude\": \"-92.81\"\n        },\n        {\n            \"latitude\": \"35.74\",\n            \"longitude\": \"-105.64\"\n        }\n    ]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/api/tour",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"api",
+						"tour"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ayushad: C&B to Hexagon",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "2a3e65df-0e40-4dfa-9d7d-bed4d4e394bc",
+						"exec": [
+							"pm.test(\"Status Test\", function() {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"JSON test\", function() {",
+							"    pm.response.to.be.withBody;",
+							"    pm.response.to.be.json;",
+							"});",
+							"",
+							"pm.test(\"requestType test\", function() {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.requestType).to.equal(\"tour\");",
+							"});",
+							"",
+							"pm.test(\"earthRadius test\", function() {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.earthRadius).to.equal(1234)",
+							"});",
+							"",
+							"pm.test(\"places test\", function() {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.places).to.not.equal(null);",
+							"    pm.expect(jsonData.places[0]).to.deep.equal({\"latitude\": \"41.11\", \"longitude\": \"-110.21\"});",
+							"    pm.expect(jsonData.places[1]).to.deep.equal({\"latitude\": \"35.45\", \"longitude\": \"-104.94\"});",
+							"    pm.expect(jsonData.places[2]).to.deep.equal({\"latitude\": \"36.17\", \"longitude\": \"-93.34\"});",
+							"    pm.expect(jsonData.places[3]).to.deep.equal({\"latitude\": \"40.58\", \"longitude\": \"-89.47\"});",
+							"    pm.expect(jsonData.places[4]).to.deep.equal({\"latitude\": \"50.52\", \"longitude\": \"-93.69\"});",
+							"    pm.expect(jsonData.places[5]).to.deep.equal({\"latitude\": \"51.19\", \"longitude\": \"-105.12\"});",
+							"});",
+							"",
+							"pm.test(\"Schema test\", function() {",
+							"    var Ajv = require(\"ajv\");",
+							"    var ajv = new Ajv({logger: console});",
+							"    var schema = {",
+							"        \"properties\": {",
+							"            \"requestType\": {",
+							"                \"type\": \"string\"",
+							"            },",
+							"            \"earthRadius\": {",
+							"                \"type\": \"number\"",
+							"            },",
+							"            \"places\": {",
+							"                \"type\": \"array\"",
+							"            },",
+							"            \"response\": {",
+							"                \"type\": \"number\"",
+							"            }",
+							"        }",
+							"    };",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(ajv.validate(schema, jsonData)).to.be.true;",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"id": "97f1ae02-0d77-4c95-9522-398485e24ede",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"requestType\": \"tour\",\n    \"earthRadius\": 1234,\n    \"response\": 0.1,\n    \"places\": [\n        {\n            \"latitude\": \"41.11\",\n            \"longitude\": \"-110.21\"\n        },\n        {\n            \"latitude\": \"35.45\",\n            \"longitude\": \"-104.94\"\n        },\n        {\n            \"latitude\": \"51.19\",\n            \"longitude\": \"-105.12\"\n        },\n        {\n            \"latitude\": \"50.52\",\n            \"longitude\": \"-93.69\"\n        },\n        {\n            \"latitude\": \"36.17\",\n            \"longitude\": \"-93.34\"\n        },\n        {\n            \"latitude\": \"40.58\",\n            \"longitude\": \"-89.47\"\n        }\n    ]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/api/tour",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"api",
+						"tour"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ayushad: Nuclear to Hexagon",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "2a3e65df-0e40-4dfa-9d7d-bed4d4e394bc",
+						"exec": [
+							"pm.test(\"Status Test\", function() {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"JSON test\", function() {",
+							"    pm.response.to.be.withBody;",
+							"    pm.response.to.be.json;",
+							"});",
+							"",
+							"pm.test(\"requestType test\", function() {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.requestType).to.equal(\"tour\");",
+							"});",
+							"",
+							"pm.test(\"earthRadius test\", function() {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.earthRadius).to.equal(1234)",
+							"});",
+							"",
+							"pm.test(\"places test\", function() {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.places).to.not.equal(null);",
+							"    pm.expect(jsonData.places[0]).to.deep.equal({\"latitude\": \"47.29\", \"longitude\": \"-107.58\"});",
+							"    pm.expect(jsonData.places[1]).to.deep.equal({\"latitude\": \"47.64\", \"longitude\": \"-98.09\"});",
+							"    pm.expect(jsonData.places[2]).to.deep.equal({\"latitude\": \"43.20\", \"longitude\": \"-94.22\"});",
+							"    pm.expect(jsonData.places[3]).to.deep.equal({\"latitude\": \"38.27\", \"longitude\": \"-97.56\"});",
+							"    pm.expect(jsonData.places[4]).to.deep.equal({\"latitude\": \"36.88\", \"longitude\": \"-109.86\"});",
+							"    pm.expect(jsonData.places[5]).to.deep.equal({\"latitude\": \"41.90\", \"longitude\": \"-113.91\"});",
+							"});",
+							"",
+							"pm.test(\"Schema test\", function() {",
+							"    var Ajv = require(\"ajv\");",
+							"    var ajv = new Ajv({logger: console});",
+							"    var schema = {",
+							"        \"properties\": {",
+							"            \"requestType\": {",
+							"                \"type\": \"string\"",
+							"            },",
+							"            \"earthRadius\": {",
+							"                \"type\": \"number\"",
+							"            },",
+							"            \"places\": {",
+							"                \"type\": \"array\"",
+							"            },",
+							"            \"response\": {",
+							"                \"type\": \"number\"",
+							"            }",
+							"        }",
+							"    };",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(ajv.validate(schema, jsonData)).to.be.true;",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"id": "104c4e2c-21c5-4402-b2bb-0755018dce2d",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"requestType\": \"tour\",\n    \"earthRadius\": 1234,\n    \"response\": 0.1,\n    \"places\": [\n        {\n            \"latitude\": \"47.29\",\n            \"longitude\": \"-107.58\"\n        },\n        {\n            \"latitude\": \"47.64\",\n            \"longitude\": \"-98.09\"\n        },\n        {\n            \"latitude\": \"36.88\",\n            \"longitude\": \"-109.86\"\n        },\n        {\n            \"latitude\": \"41.90\",\n            \"longitude\": \"-113.91\"\n        },\n        {\n            \"latitude\": \"43.20\",\n            \"longitude\": \"-94.22\"\n        },\n        {\n            \"latitude\": \"38.27\",\n            \"longitude\": \"-97.56\"\n        }\n    ]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/api/tour",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"api",
+						"tour"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ayushad: ADEFBC  to Hexagon",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "2a3e65df-0e40-4dfa-9d7d-bed4d4e394bc",
+						"exec": [
+							"pm.test(\"Status Test\", function() {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"JSON test\", function() {",
+							"    pm.response.to.be.withBody;",
+							"    pm.response.to.be.json;",
+							"});",
+							"",
+							"pm.test(\"requestType test\", function() {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.requestType).to.equal(\"tour\");",
+							"});",
+							"",
+							"pm.test(\"earthRadius test\", function() {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.earthRadius).to.equal(1234)",
+							"});",
+							"",
+							"pm.test(\"places test\", function() {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.places).to.not.equal(null);",
+							"    pm.expect(jsonData.places[0]).to.deep.equal({\"latitude\": \"47.64\", \"longitude\": \"-102.30\"});",
+							"    pm.expect(jsonData.places[1]).to.deep.equal({\"latitude\": \"46.08\", \"longitude\": \"-110.92\"});",
+							"    pm.expect(jsonData.places[2]).to.deep.equal({\"latitude\": \"39.09\", \"longitude\": \"-112.50\"});",
+							"    pm.expect(jsonData.places[3]).to.deep.equal({\"latitude\": \"31.64\", \"longitude\": \"-103.89\"});",
+							"    pm.expect(jsonData.places[4]).to.deep.equal({\"latitude\": \"35.45\", \"longitude\": \"-92.81\"});",
+							"    pm.expect(jsonData.places[5]).to.deep.equal({\"latitude\": \"43.07\", \"longitude\": \"-90.18\"});",
+							"});",
+							"",
+							"pm.test(\"Schema test\", function() {",
+							"    var Ajv = require(\"ajv\");",
+							"    var ajv = new Ajv({logger: console});",
+							"    var schema = {",
+							"        \"properties\": {",
+							"            \"requestType\": {",
+							"                \"type\": \"string\"",
+							"            },",
+							"            \"earthRadius\": {",
+							"                \"type\": \"number\"",
+							"            },",
+							"            \"places\": {",
+							"                \"type\": \"array\"",
+							"            },",
+							"            \"response\": {",
+							"                \"type\": \"number\"",
+							"            }",
+							"        }",
+							"    };",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(ajv.validate(schema, jsonData)).to.be.true;",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"id": "e536b4dc-e715-4b72-b202-706d7a1f9a57",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"requestType\": \"tour\",\n    \"earthRadius\": 1234,\n    \"response\": 0.1,\n    \"places\": [\n        {\n            \"latitude\": \"47.64\",\n            \"longitude\": \"-102.30\"\n        },\n        {\n            \"latitude\": \"46.08\",\n            \"longitude\": \"-110.92\"\n        },\n        {\n            \"latitude\": \"39.09\",\n            \"longitude\": \"-112.50\"\n        },\n        {\n            \"latitude\": \"35.45\",\n            \"longitude\": \"-92.81\"\n        },\n        {\n            \"latitude\": \"43.07\",\n            \"longitude\": \"-90.18\"\n        },\n        {\n            \"latitude\": \"31.64\",\n            \"longitude\": \"-103.89\"\n        }\n    ]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/api/tour",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"api",
+						"tour"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ayushad: Tour 'Best Test' Request",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "c32f1ea9-9ae9-43aa-b65d-f777a18f7695",
+						"exec": [
+							"pm.test(\"Status Test\", function() {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"JSON test\", function() {",
+							"    pm.response.to.be.withBody;",
+							"    pm.response.to.be.json;",
+							"});",
+							"",
+							"pm.test(\"requestType test\", function() {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.requestType).to.equal(\"tour\");",
+							"});",
+							"",
+							"pm.test(\"earthRadius test\", function() {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.earthRadius).to.equal(45.0)",
+							"});",
+							"",
+							"pm.test(\"tour test -- retains starting point\", function() {",
+							"    var jsonData = pm.response.json();",
+							"    var firstPlace = jsonData.places[0].name;",
+							"    pm.expect(jsonData.distances).to.not.equal(null);",
+							"    pm.expect(firstPlace).to.deep.equals(\"The Floating Bar\");",
+							"});",
+							"",
+							"pm.test(\"tour test -- correct end point\", function() {",
+							"    var jsonData = pm.response.json();",
+							"    var lastIndex = jsonData.places.length - 1;",
+							"    var lastPlace = jsonData.places[lastIndex].name;",
+							"    pm.expect(jsonData.distances).to.not.equal(null);",
+							"    pm.expect(lastPlace).to.deep.equals(\"Iceberg Bar\");",
+							"});",
+							"",
+							"pm.test(\"Schema test\", function() {",
+							"    var Ajv = require(\"ajv\");",
+							"    var ajv = new Ajv({logger: console});",
+							"    var schema = {",
+							"        \"properties\": {",
+							"            \"distances\": {",
+							"                \"type\": \"array\",",
+							"                \"minItem\": 0",
+							"            },",
+							"            \"requestType\": {",
+							"                \"type\": \"string\"",
+							"            },",
+							"            \"earthRadius\": {",
+							"                \"type\": \"number\"",
+							"            },",
+							"            \"places\": {",
+							"                \"type\": \"array\"",
+							"            }",
+							"        }",
+							"    };",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(ajv.validate(schema, jsonData)).to.be.true;",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"id": "499f1f99-e314-433d-8bbb-13aadb631431",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"requestType\": \"tour\",\n    \"earthRadius\": 45.0,\n    \"response\": 0.01,\n    \"places\": [\n        {\n            \"name\": \"The Floating Bar\",\n            \"latitude\": \"0.0000\",\n            \"longitude\": \"0.0000\",\n            \"municipality\": \"International Waters\",\n            \"region\": \"N/A\",\n            \"country\": \"N/A\",\n            \"notes\": \"A bar set on a platform in the middle of the ocean.\"\n        },\n        {\n            \"name\": \"The Lava Lounge\",\n            \"latitude\": \"19.406899\",\n            \"longitude\": \"-155.283783\",\n            \"municipality\": \"Volcano\",\n            \"region\": \"Hawaii\",\n            \"country\": \"United States\",\n            \"notes\": \"A daring establishment located on the edge of an active volcano.\"\n        },\n        {\n            \"name\": \"Iceberg Bar\",\n            \"latitude\": \"-64.835365\",\n            \"longitude\": \"-63.499482\",\n            \"municipality\": \"Antarctica\",\n            \"region\": \"N/A\",\n            \"country\": \"N/A\",\n            \"notes\": \"A bar carved inside an actual iceberg, offering chilled beverages.\"\n        },\n        {\n            \"name\": \"Desert Pub\",\n            \"latitude\": \"25.0000\",\n            \"longitude\": \"45.0000\",\n            \"municipality\": \"Rub' al Khali\",\n            \"region\": \"N/A\",\n            \"country\": \"Saudi Arabia\",\n            \"notes\": \"An oasis-themed bar in the middle of the largest sand desert in the world.\"\n        },\n        {\n            \"name\": \"Death Defying Drinks\",\n            \"latitude\": \"27.9881\",\n            \"longitude\": \"86.9250\",\n            \"municipality\": \"Mount Everest\",\n            \"region\": \"N/A\",\n            \"country\": \"Nepal\",\n            \"notes\": \"The highest altitude bar in the world, located near the Everest Base Camp.\"\n        },\n        {\n            \"name\": \"Under the Sea with Aerial\",\n            \"latitude\": \"28.396837\",\n            \"longitude\": \"-80.605659\",\n            \"municipality\": \"Atlantis\",\n            \"region\": \"Underwater\",\n            \"country\": \"International Waters\",\n            \"notes\": \"A submerged pub for divers, featuring waterproof beverages.\"\n        },\n        {\n            \"name\": \"Space Tavern\",\n            \"latitude\": \"35.0844\",\n            \"longitude\": \"-106.6504\",\n            \"municipality\": \"Tranquility Base\",\n            \"region\": \"Western US\",\n            \"country\": \"United States\",\n            \"notes\": \"A conceptual bar for future lunar tourists, offering 'space brews'.\"\n        },\n        {\n            \"name\": \"The End of the World Saloon\",\n            \"latitude\": \"-54.801912\",\n            \"longitude\": \"-68.302951\",\n            \"municipality\": \"Ushuaia\",\n            \"region\": \"Tierra del Fuego\",\n            \"country\": \"Argentina\",\n            \"notes\": \"A cozy tavern at the southernmost tip of South America, often considered the 'end of the world'.\"\n        },\n        {\n            \"name\": \"Aurora Spirits\",\n            \"latitude\": \"78.223172\",\n            \"longitude\": \"15.646932\",\n            \"municipality\": \"Longyearbyen\",\n            \"region\": \"Svalbard\",\n            \"country\": \"Norway\",\n            \"notes\": \"A bar offering stunning views of the Northern Lights from within the Arctic Circle.\"\n        },\n        {\n            \"name\": \"The Hollow Earth Bar\",\n            \"latitude\": \"90.0000\",\n            \"longitude\": \"135.0000\",\n            \"municipality\": \"North Pole\",\n            \"region\": \"Inner Earth\",\n            \"country\": \"N/A\",\n            \"notes\": \"A mythical bar rumored to be at the entrance to the hollow earth, accessible only to the most adventurous.\"\n        },\n        {\n            \"name\": \"The Time Traveler's Tavern\",\n            \"latitude\": \"51.477928\",\n            \"longitude\": \"-0.001545\",\n            \"municipality\": \"Greenwich\",\n            \"region\": \"London\",\n            \"country\": \"United Kingdom\",\n            \"notes\": \"Located at the Prime Meridian, it's a thematic bar celebrating the history of timekeeping and navigation.\"\n        }\n    ]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/api/tour",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"api",
+						"tour"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ayushad: Tour Negative Radius",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "c32f1ea9-9ae9-43aa-b65d-f777a18f7695",
+						"exec": [
+							"pm.test(\"Status Test\", function() {",
+							"    pm.response.to.have.status(400);",
+							"});",
+							"",
+							"pm.test(\"JSON test\", function() {",
+							"    pm.response.to.be.withBody;",
+							"    pm.response.to.be.json;",
+							"});",
+							"",
+							"pm.test(\"requestType test\", function() {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.requestType).to.equal(\"tour\");",
+							"});",
+							"",
+							"pm.test(\"earthRadius test\", function() {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.earthRadius).to.equal(-1)",
+							"});",
+							"",
+							"pm.test(\"Schema test\", function() {",
+							"    var Ajv = require(\"ajv\");",
+							"    var ajv = new Ajv({logger: console});",
+							"    var schema = {",
+							"        \"properties\": {",
+							"            \"distances\": {",
+							"                \"type\": \"array\",",
+							"                \"minItem\": 0",
+							"            },",
+							"            \"requestType\": {",
+							"                \"type\": \"string\"",
+							"            },",
+							"            \"earthRadius\": {",
+							"                \"type\": \"number\"",
+							"            },",
+							"            \"places\": {",
+							"                \"type\": \"array\"",
+							"            }",
+							"        }",
+							"    };",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(ajv.validate(schema, jsonData)).to.be.true;",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"id": "e4d6fef5-87d2-4679-ae60-da416641d931",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"requestType\": \"tour\",\n    \"earthRadius\": -1,\n    \"response\": 0.01,\n    \"places\": [\n        {\n            \"name\": \"The Hollow Earth Bar\",\n            \"latitude\": \"90.0000\",\n            \"longitude\": \"135.0000\",\n            \"municipality\": \"North Pole\",\n            \"region\": \"Inner Earth\",\n            \"country\": \"N/A\",\n            \"notes\": \"A mythical bar rumored to be at the entrance to the hollow earth, accessible only to the most adventurous.\"\n        },\n        {\n            \"name\": \"The Time Traveler's Tavern\",\n            \"latitude\": \"51.477928\",\n            \"longitude\": \"-0.001545\",\n            \"municipality\": \"Greenwich\",\n            \"region\": \"London\",\n            \"country\": \"United Kingdom\",\n            \"notes\": \"Located at the Prime Meridian, it's a thematic bar celebrating the history of timekeeping and navigation.\"\n        }\n    ]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/api/tour",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"api",
+						"tour"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ayushad: Tour Empty Places",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "c32f1ea9-9ae9-43aa-b65d-f777a18f7695",
+						"exec": [
+							"pm.test(\"Status Test\", function() {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"JSON test\", function() {",
+							"    pm.response.to.be.withBody;",
+							"    pm.response.to.be.json;",
+							"});",
+							"",
+							"pm.test(\"requestType test\", function() {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.requestType).to.equal(\"tour\");",
+							"});",
+							"",
+							"pm.test(\"earthRadius test\", function() {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.earthRadius).to.equal(42)",
+							"});",
+							"",
+							"pm.test(\"Schema test\", function() {",
+							"    var Ajv = require(\"ajv\");",
+							"    var ajv = new Ajv({logger: console});",
+							"    var schema = {",
+							"        \"properties\": {",
+							"            \"distances\": {",
+							"                \"type\": \"array\",",
+							"                \"minItem\": 0",
+							"            },",
+							"            \"requestType\": {",
+							"                \"type\": \"string\"",
+							"            },",
+							"            \"earthRadius\": {",
+							"                \"type\": \"number\"",
+							"            },",
+							"            \"places\": {",
+							"                \"type\": \"array\"",
+							"            }",
+							"        }",
+							"    };",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(ajv.validate(schema, jsonData)).to.be.true;",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"id": "cbe1ab3a-d376-4811-a08b-d16e51a6d21b",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"requestType\": \"tour\",\n    \"earthRadius\": 42,\n    \"response\": 0.01,\n    \"places\": []\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/api/tour",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"api",
+						"tour"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ayushad: Tour Zero Radius",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "c32f1ea9-9ae9-43aa-b65d-f777a18f7695",
+						"exec": [
+							"pm.test(\"Status Test\", function() {",
+							"    pm.response.to.have.status(400);",
+							"});",
+							"",
+							"pm.test(\"JSON test\", function() {",
+							"    pm.response.to.be.withBody;",
+							"    pm.response.to.be.json;",
+							"});",
+							"",
+							"pm.test(\"requestType test\", function() {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.requestType).to.equal(\"tour\");",
+							"});",
+							"",
+							"pm.test(\"earthRadius test\", function() {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.earthRadius).to.equal(0)",
+							"});",
+							"",
+							"pm.test(\"Schema test\", function() {",
+							"    var Ajv = require(\"ajv\");",
+							"    var ajv = new Ajv({logger: console});",
+							"    var schema = {",
+							"        \"properties\": {",
+							"            \"distances\": {",
+							"                \"type\": \"array\",",
+							"                \"minItem\": 0",
+							"            },",
+							"            \"requestType\": {",
+							"                \"type\": \"string\"",
+							"            },",
+							"            \"earthRadius\": {",
+							"                \"type\": \"number\"",
+							"            },",
+							"            \"places\": {",
+							"                \"type\": \"array\"",
+							"            }",
+							"        }",
+							"    };",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(ajv.validate(schema, jsonData)).to.be.true;",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"id": "50330e65-b16e-4505-b2eb-bca141c5bd51",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"requestType\": \"tour\",\n    \"earthRadius\": 0,\n    \"response\": 0.0010001112,\n    \"places\": [\n        {\n            \"name\": \"Arizona Memorial\",\n            \"latitude\": \"21.36673\",\n            \"longitude\": \"-157.93467\",\n            \"municipality\": \"Honolulu\",\n            \"region\": \"Hawaii\",\n            \"country\": \"United States\"\n        },\n        {\n            \"name\": \"Japanese Memorial\",\n            \"latitude\": \"28.21683\",\n            \"longitude\": \"-177.37861\",\n            \"municipality\": \"Midway Atoll\",\n            \"region\": \"Hawaii\",\n            \"country\": \"United States\"\n        },\n        {\n            \"name\": \"Wake Island Airfield\",\n            \"latitude\": \"19.28145\",\n            \"longitude\": \"166.64445\",\n            \"municipality\": \"Wake Island\",\n            \"region\": \"Hawaii\",\n            \"country\": \"United States\"\n        },\n        {\n            \"name\": \"Anderson AFB\",\n            \"latitude\": \"13.57170\",\n            \"longitude\": \"144.93041\",\n            \"municipality\": \"Anderson AFB\",\n            \"region\": \"Guam\",\n            \"country\": \"United States\"\n        },\n        {\n            \"name\": \"Suicide Cliff\",\n            \"latitude\": \"15.27750\",\n            \"longitude\": \"145.80973\",\n            \"municipality\": \"Saipan\",\n            \"region\": \"Northern Mariana Islands\",\n            \"country\": \"United States\"\n        },\n        {\n            \"name\": \"Bloody Beach\",\n            \"latitude\": \"6.98085\",\n            \"longitude\": \"134.22533\",\n            \"municipality\": \"Peleliu\",\n            \"region\": \"Peleliu\",\n            \"country\": \"Palau\"\n        },\n        {\n            \"name\": \"Peace Memorial Park\",\n            \"latitude\": \"26.09543\",\n            \"longitude\": \"127.72431\",\n            \"municipality\": \"Itoman\",\n            \"region\": \"Okinawa\",\n            \"country\": \"Japan\"\n        },\n        {\n            \"name\": \"Mount Suribachi\",\n            \"latitude\": \"24.75064\",\n            \"longitude\": \"141.28917\",\n            \"municipality\": \"Iwo Jima\",\n            \"region\": \"Tokyo\",\n            \"country\": \"Japan\"\n        }\n    ]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/api/tour",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"api",
+						"tour"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ayushad: Tour Response Time is -1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "c32f1ea9-9ae9-43aa-b65d-f777a18f7695",
+						"exec": [
+							"pm.test(\"Status Test\", function() {",
+							"    pm.response.to.have.status(400);",
+							"});",
+							"",
+							"pm.test(\"JSON test\", function() {",
+							"    pm.response.to.be.withBody;",
+							"    pm.response.to.be.json;",
+							"});",
+							"",
+							"pm.test(\"requestType test\", function() {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.requestType).to.equal(\"tour\");",
+							"});",
+							"",
+							"pm.test(\"earthRadius test\", function() {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.earthRadius).to.equal(42)",
+							"});",
+							"",
+							"pm.test(\"Schema test\", function() {",
+							"    var Ajv = require(\"ajv\");",
+							"    var ajv = new Ajv({logger: console});",
+							"    var schema = {",
+							"        \"properties\": {",
+							"            \"distances\": {",
+							"                \"type\": \"array\",",
+							"                \"minItem\": 0",
+							"            },",
+							"            \"requestType\": {",
+							"                \"type\": \"string\"",
+							"            },",
+							"            \"earthRadius\": {",
+							"                \"type\": \"number\"",
+							"            },",
+							"            \"places\": {",
+							"                \"type\": \"array\"",
+							"            }",
+							"        }",
+							"    };",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(ajv.validate(schema, jsonData)).to.be.true;",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"id": "3eb97553-1dd8-49b5-b483-e32442c54ae1",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"requestType\": \"tour\",\n    \"earthRadius\": 42,\n    \"response\": -1,\n    \"places\": [\n        {\n            \"name\": \"Arizona Memorial\",\n            \"latitude\": \"21.36673\",\n            \"longitude\": \"-157.93467\",\n            \"municipality\": \"Honolulu\",\n            \"region\": \"Hawaii\",\n            \"country\": \"United States\"\n        },\n        {\n            \"name\": \"Japanese Memorial\",\n            \"latitude\": \"28.21683\",\n            \"longitude\": \"-177.37861\",\n            \"municipality\": \"Midway Atoll\",\n            \"region\": \"Hawaii\",\n            \"country\": \"United States\"\n        },\n        {\n            \"name\": \"Wake Island Airfield\",\n            \"latitude\": \"19.28145\",\n            \"longitude\": \"166.64445\",\n            \"municipality\": \"Wake Island\",\n            \"region\": \"Hawaii\",\n            \"country\": \"United States\"\n        },\n        {\n            \"name\": \"Anderson AFB\",\n            \"latitude\": \"13.57170\",\n            \"longitude\": \"144.93041\",\n            \"municipality\": \"Anderson AFB\",\n            \"region\": \"Guam\",\n            \"country\": \"United States\"\n        },\n        {\n            \"name\": \"Suicide Cliff\",\n            \"latitude\": \"15.27750\",\n            \"longitude\": \"145.80973\",\n            \"municipality\": \"Saipan\",\n            \"region\": \"Northern Mariana Islands\",\n            \"country\": \"United States\"\n        },\n        {\n            \"name\": \"Bloody Beach\",\n            \"latitude\": \"6.98085\",\n            \"longitude\": \"134.22533\",\n            \"municipality\": \"Peleliu\",\n            \"region\": \"Peleliu\",\n            \"country\": \"Palau\"\n        },\n        {\n            \"name\": \"Peace Memorial Park\",\n            \"latitude\": \"26.09543\",\n            \"longitude\": \"127.72431\",\n            \"municipality\": \"Itoman\",\n            \"region\": \"Okinawa\",\n            \"country\": \"Japan\"\n        },\n        {\n            \"name\": \"Mount Suribachi\",\n            \"latitude\": \"24.75064\",\n            \"longitude\": \"141.28917\",\n            \"municipality\": \"Iwo Jima\",\n            \"region\": \"Tokyo\",\n            \"country\": \"Japan\"\n        }\n    ]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/api/tour",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"api",
+						"tour"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ayushad: Tour Response 1 All regions",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "5b05ef4c-80e5-4e30-851d-6a4703455c24",
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "62b4b8d3-d4f0-469f-b1ff-2f7dde78a022",
+						"exec": [
+							"pm.test(\"Status Test\", function() {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"JSON test\", function() {",
+							"    pm.response.to.be.withBody;",
+							"    pm.response.to.be.json;",
+							"});",
+							"",
+							"pm.test(\"places test\", function() {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.places).to.not.equal(null);",
+							"    pm.expect(jsonData.places[0]).to.deep.equal({\"latitude\": \"84.57\",\"longitude\": \"-17.93\"});",
+							"    pm.expect(jsonData.places[1]).to.deep.equal({\"latitude\": \"36.73\",\"longitude\": \"-108.63\"});",
+							"    pm.expect(jsonData.places[2]).to.deep.equal({\"latitude\": \"5.76\",\"longitude\": \"-58.71\"});  ",
+							"    pm.expect(jsonData.places[3]).to.deep.equal({\"latitude\": \"-81.71\",\"longitude\": \"-16.52\"});",
+							"    pm.expect(jsonData.places[4]).to.deep.equal({\"latitude\": \"18.12\",\"longitude\": \"43.24\"});",
+							"    pm.expect(jsonData.places[5]).to.deep.equal({\"latitude\": \"72.03\",\"longitude\": \"110.04\"});",
+							"    pm.expect(jsonData.places[6]).to.deep.equal({\"latitude\": \"74.27\",\"longitude\": \"25.66\"});",
+							"",
+							"});",
+							"",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"id": "dcca6e1e-c27e-465a-9252-567553c80d9b",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"requestType\": \"tour\",\n    \"earthRadius\": 64334,\n    \"response\": 1,\n    \"formula\": \"vincenty\",\n    \"places\": [\n        {\n            \"latitude\": \"84.57\",\n            \"longitude\": \"-17.93\"\n        },\n        {\n            \"latitude\": \"36.73\",\n            \"longitude\": \"-108.63\"\n        },\n        {\n            \"latitude\": \"18.12\",\n            \"longitude\": \"43.24\"\n        },\n        {\n            \"latitude\": \"72.03\",\n            \"longitude\": \"110.04\"\n        },\n        {\n            \"latitude\": \"5.76\",\n            \"longitude\": \"-58.71\"\n        },\n        {\n            \"latitude\": \"74.27\",\n            \"longitude\": \"25.66\"\n            \n        },\n        {\n            \"latitude\": \"-81.71\",\n            \"longitude\": \"-16.52\"\n        }\n    ]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/api/tour",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"api",
+						"tour"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ayushad: Tour Response 0",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "5b05ef4c-80e5-4e30-851d-6a4703455c24",
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "62b4b8d3-d4f0-469f-b1ff-2f7dde78a022",
+						"exec": [
+							"pm.test(\"Status Test\", function() {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"JSON test\", function() {",
+							"    pm.response.to.be.withBody;",
+							"    pm.response.to.be.json;",
+							"});",
+							"",
+							"pm.test(\"places test\", function() {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.places).to.not.equal(null);",
+							"    pm.expect(jsonData.places[0]).to.deep.equal({\"latitude\": \"44.09\", \"longitude\": \"-108.46\"});",
+							"    pm.expect(jsonData.places[1]).to.deep.equal({\"latitude\": \"45.23\", \"longitude\": \"-90.18\"});",
+							"    pm.expect(jsonData.places[2]).to.deep.equal({\"latitude\": \"33.28\", \"longitude\": \"-105.82\"});",
+							"    pm.expect(jsonData.places[3]).to.deep.equal({\"latitude\": \"35.32\", \"longitude\": \"-86.84\"});",
+							"});",
+							"",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"id": "d2991197-292a-429f-8f9b-fb6f739e9edc",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"requestType\": \"tour\",\n    \"earthRadius\": 64334,\n    \"response\": 0,\n    \"formula\": \"vincenty\",\n    \"places\": [\n        {\n            \"latitude\": \"44.09\",\n            \"longitude\": \"-108.46\"\n        },\n        {\n            \"latitude\": \"45.23\",\n            \"longitude\": \"-90.18\"\n        },\n        {\n            \"latitude\": \"33.28\",\n            \"longitude\": \"-105.82\"\n        },\n        {\n            \"latitude\": \"35.32\",\n            \"longitude\": \"-86.84\"\n        }\n    ]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/api/tour",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"api",
+						"tour"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ayushad: Tour Response 0.42 Already Optimized",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "5b05ef4c-80e5-4e30-851d-6a4703455c24",
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "62b4b8d3-d4f0-469f-b1ff-2f7dde78a022",
+						"exec": [
+							"pm.test(\"Status Test\", function() {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"JSON test\", function() {",
+							"    pm.response.to.be.withBody;",
+							"    pm.response.to.be.json;",
+							"});",
+							"",
+							"pm.test(\"places test\", function() {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.places).to.not.equal(null);",
+							"    pm.expect(jsonData.places[0]).to.deep.equal({\"latitude\":\"40.576018905092255\",\"longitude\":\"-105.09826183319092\"});",
+							"    pm.expect(jsonData.places[1]).to.deep.equal({\"latitude\":\"40.54721127132016\",\"longitude\":\"-105.09315490722658\"});",
+							"    pm.expect(jsonData.places[2]).to.deep.equal({\"latitude\":\"40.593094180373775\",\"longitude\":\"-104.95925903320314\"});",
+							"    pm.expect(jsonData.places[3]).to.deep.equal({\"latitude\":\"40.564421048861945\",\"longitude\":\"-104.78485107421875\"});",
+							"    pm.expect(jsonData.places[4]).to.deep.equal({\"latitude\":\"40.656131804537196\",\"longitude\":\"-104.83840942382814\"});",
+							"    pm.expect(jsonData.places[5]).to.deep.equal({\"latitude\":\"40.667586798122066\",\"longitude\":\"-105.1274871826172\"});",
+							"    pm.expect(jsonData.places[6]).to.deep.equal({\"latitude\":\"40.62540188304931\",\"longitude\":\"-105.19134521484376\"});",
+							"    pm.expect(jsonData.places[7]).to.deep.equal({\"latitude\":\"40.56911385679108\",\"longitude\":\"-105.19477844238283\"});",
+							"});",
+							"",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"id": "92366a0d-015b-4606-bfff-a2df30f63ab4",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"requestType\": \"tour\",\n    \"earthRadius\": 42,\n    \"response\": 0.42,\n\t\"places\": [\n\t\t{\n\t\t\t\"latitude\":\"40.576018905092255\",\n\t\t\t\"longitude\":\"-105.09826183319092\"\n\t\t},\n\t\t{\n\t\t\t\"latitude\":\"40.54721127132016\",\n\t\t\t\"longitude\":\"-105.09315490722658\"\n\t\t},\n\t\t{\n\t\t\t\"latitude\":\"40.593094180373775\",\n\t\t\t\"longitude\":\"-104.95925903320314\"\n\t\t},\n\t\t{\n\n\t\t\t\"latitude\":\"40.564421048861945\",\n\t\t\t\"longitude\":\"-104.78485107421875\"\n\t\t},\n\t\t{\n\t\t\t\"latitude\":\"40.656131804537196\",\n\t\t\t\"longitude\":\"-104.83840942382814\"\n\t\t},\n\t\t{\n\t\t\t\"latitude\":\"40.667586798122066\",\n\t\t\t\"longitude\":\"-105.1274871826172\"\n\t\t},\n\t\t{\n\t\t\t\"latitude\":\"40.62540188304931\",\n\t\t\t\"longitude\":\"-105.19134521484376\"\n\t\t},\n\t\t{\n\t\t\t\"latitude\":\"40.56911385679108\",\n\t\t\t\"longitude\":\"-105.19477844238283\"\n\t\t}\n\t]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/api/tour",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"api",
+						"tour"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

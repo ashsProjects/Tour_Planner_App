@@ -1,0 +1,1234 @@
+{
+	"info": {
+		"_postman_id": "b3cfbaa3-3c13-4400-b6cf-5e2a5ac826a5",
+		"name": "distances",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_uid": "25883428-b3cfbaa3-3c13-4400-b6cf-5e2a5ac826a5"
+	},
+	"item": [
+		{
+			"name": "ayushad: Distances Min Radius No Place",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "2a4ca647-75ca-47af-9e25-4ea2bc6b1cc0",
+						"exec": [
+							"pm.test(\"Status Test\", function() {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"JSON test\", function() {",
+							"    pm.response.to.be.withBody;",
+							"    pm.response.to.be.json;",
+							"});",
+							"",
+							"pm.test(\"requestType test\", function() {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.requestType).to.equal(\"distances\");",
+							"});",
+							"",
+							"pm.test(\"earthRadius test\", function() {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.earthRadius).to.equal(1.0)",
+							"});",
+							"",
+							"pm.test(\"distances test\", function() {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.distances).to.not.equal(null);",
+							"    pm.expect(jsonData.distances).to.be.empty;",
+							"});",
+							"",
+							"pm.test(\"Schema test\", function() {",
+							"    var Ajv = require(\"ajv\");",
+							"    var ajv = new Ajv({logger: console});",
+							"    var schema = {",
+							"        \"properties\": {",
+							"            \"distances\": {",
+							"                \"type\": \"array\",",
+							"                \"minItem\": 0",
+							"            },",
+							"            \"requestType\": {",
+							"                \"type\": \"string\"",
+							"            },",
+							"            \"earthRadius\": {",
+							"                \"type\": \"number\"",
+							"            },",
+							"            \"places\": {",
+							"                \"type\": \"array\"",
+							"            }",
+							"        }",
+							"    };",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(ajv.validate(schema, jsonData)).to.be.true;",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"id": "94ec1780-9f58-465f-abe1-c37fe6ab18f4",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"requestType\": \"distances\",\n    \"places\": [],\n    \"earthRadius\": 1\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/api/distances",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"api",
+						"distances"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ayushad: Distances Invalid",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "59da2d8c-992e-4cbc-a961-fdcc96e6cd63",
+						"exec": [
+							"pm.test(\"Status test for invalid request to the endpoint\", function() {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"id": "b91e845d-f84b-420d-96ec-13f8a4d5e034",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"requestType\": \"distances\",\r\n    \"places\": [],\r\n    \"invalid\": \"fail\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/api/distances",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"api",
+						"distances"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ayushad: Formula Invalid",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "59da2d8c-992e-4cbc-a961-fdcc96e6cd63",
+						"exec": [
+							"pm.test(\"Status test for invalid request to the endpoint\", function() {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"id": "56246020-1547-41cf-a433-485d4b4bb195",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"requestType\": \"distances\",\r\n    \"places\": [],\r\n    \"earthRadius\": 10,\r\n    \"formula\": \"swish\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/api/distances",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"api",
+						"distances"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ayushad: Distances Max Radius No Places",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "d6f77ba4-902e-4168-be6a-c096ef19955c",
+						"exec": [
+							"pm.test(\"Status Test\", function() {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"JSON test\", function() {\r",
+							"    pm.response.to.be.withBody;\r",
+							"    pm.response.to.be.json;\r",
+							"});\r",
+							"\r",
+							"pm.test(\"requestType test\", function() {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.requestType).to.equal(\"distances\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"earthRadius test\", function() {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    let MAX_LON_VAL = 9_223_372_036_854_775_807;\r",
+							"    pm.expect(jsonData.earthRadius).to.equal(MAX_LON_VAL)\r",
+							"});\r",
+							"\r",
+							"pm.test(\"distances test\", function() {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.distances).to.not.equal(null);\r",
+							"    pm.expect(jsonData.distances).to.be.empty;\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Schema test\", function() {\r",
+							"    var Ajv = require(\"ajv\");\r",
+							"    var ajv = new Ajv({logger: console});\r",
+							"    var schema = {\r",
+							"        \"properties\": {\r",
+							"            \"distances\": {\r",
+							"                \"type\": \"array\",\r",
+							"                \"minItem\": 0\r",
+							"            },\r",
+							"            \"requestType\": {\r",
+							"                \"type\": \"string\"\r",
+							"            },\r",
+							"            \"earthRadius\": {\r",
+							"                \"type\": \"number\"\r",
+							"            },\r",
+							"            \"places\": {\r",
+							"                \"type\": \"array\"\r",
+							"            }\r",
+							"        }\r",
+							"    };\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(ajv.validate(schema, jsonData)).to.be.true;\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"id": "6074087c-a15e-45d1-9de6-d077d954a476",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"requestType\": \"distances\",\r\n    \"places\": [],\r\n    \"earthRadius\": 9223372036854775807\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/api/distances",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"api",
+						"distances"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ayushad: 12 Places Vincenty",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "6811e1ad-e769-46ce-8648-32096fa10fe0",
+						"exec": [
+							"pm.test(\"Status Test\", function() {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"JSON test\", function() {\r",
+							"    pm.response.to.be.withBody;\r",
+							"    pm.response.to.be.json;\r",
+							"});\r",
+							"\r",
+							"pm.test(\"requestType test\", function() {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.requestType).to.equal(\"distances\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"earthRadius test\", function() {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.earthRadius).to.equal(271828.0)\r",
+							"});\r",
+							"\r",
+							"pm.test(\"distances test\", function() {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    let correct_distances = [194034, 305380, 49822, 501278, 393688, 853973, 671208, 395961, 331051, 605602, 502287, 596363];\r",
+							"    pm.expect(jsonData.distances).to.not.equal(null);\r",
+							"    pm.expect(jsonData.distances).to.deep.equals(correct_distances);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"formula test\", function() {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.formula).to.equal(\"vincenty\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Schema test\", function() {\r",
+							"    var Ajv = require(\"ajv\");\r",
+							"    var ajv = new Ajv({logger: console});\r",
+							"    var schema = {\r",
+							"        \"properties\": {\r",
+							"            \"distances\": {\r",
+							"                \"type\": \"array\",\r",
+							"                \"minItem\": 0\r",
+							"            },\r",
+							"            \"requestType\": {\r",
+							"                \"type\": \"string\"\r",
+							"            },\r",
+							"            \"earthRadius\": {\r",
+							"                \"type\": \"number\"\r",
+							"            },\r",
+							"            \"places\": {\r",
+							"                \"type\": \"array\"\r",
+							"            }\r",
+							"        }\r",
+							"    };\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(ajv.validate(schema, jsonData)).to.be.true;\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"id": "7bafd8d2-d3b6-466c-ae7f-be1d1f566f38",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"requestType\": \"distances\",\r\n    \"places\": [\r\n        {\"name\": \"Never, Amur Oblast, Russia\", \"latitude\": \"53.9766\", \"longitude\": \"124.1388\"},\r\n        {\"name\": \"Gonna, West Bengal, India\", \"latitude\": \"23.4576\", \"longitude\": \"87.6803\"},\r\n        {\"name\": \"Give, Denmark\", \"latitude\": \"55.8454\", \"longitude\": \"9.2370\"},\r\n        {\"name\": \"Youx, France\", \"latitude\": \"46.1454\", \"longitude\": \"2.7985\"},\r\n        {\"name\": \"Upi, Philippines\", \"latitude\": \"7.0186\", \"longitude\": \"124.1752\"},\r\n        {\"name\": \"North Pole\", \"latitude\": \"90.0\", \"longitude\": \"0.0\"},\r\n        {\"name\": \"South Pole\", \"latitude\": \"-90.0\", \"longitude\": \"0.0\"},\r\n        {\"name\": \"Greenwich, England\", \"latitude\": \"51.4769\", \"longitude\": \"-0.0005\"},\r\n        {\"name\": \"Rio de Janeiro, Brazil\", \"latitude\": \"-22.9068\", \"longitude\": \"-43.1729\"},\r\n        {\"name\": \"New York City, USA\", \"latitude\": \"40.7128\", \"longitude\": \"-74.0060\"},\r\n        {\"name\": \"Auckland, New Zealand\", \"latitude\": \"-36.8485\", \"longitude\": \"174.7633\"},\r\n        {\"name\": \"Cape Town, South Africa\", \"latitude\": \"-33.9249\", \"longitude\": \"18.4241\"}\r\n    ],\r\n    \"earthRadius\": 271828,\r\n    \"formula\": \"vincenty\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/api/distances",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"api",
+						"distances"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ayushad: 12 Places No Formula",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "6811e1ad-e769-46ce-8648-32096fa10fe0",
+						"exec": [
+							"pm.test(\"Status Test\", function() {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"JSON test\", function() {\r",
+							"    pm.response.to.be.withBody;\r",
+							"    pm.response.to.be.json;\r",
+							"});\r",
+							"\r",
+							"pm.test(\"requestType test\", function() {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.requestType).to.equal(\"distances\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"earthRadius test\", function() {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.earthRadius).to.equal(271828.0)\r",
+							"});\r",
+							"\r",
+							"pm.test(\"formula test\", function() {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData).to.not.have.property(\"formula\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"distances test\", function() {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    let correct_distances = [194034, 305380, 49822, 501278, 393688, 853973, 671208, 395961, 331051, 605602, 502287, 596363];\r",
+							"    pm.expect(jsonData.distances).to.not.equal(null);\r",
+							"    pm.expect(jsonData.distances).to.deep.equals(correct_distances);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Schema test\", function() {\r",
+							"    var Ajv = require(\"ajv\");\r",
+							"    var ajv = new Ajv({logger: console});\r",
+							"    var schema = {\r",
+							"        \"properties\": {\r",
+							"            \"distances\": {\r",
+							"                \"type\": \"array\",\r",
+							"                \"minItem\": 0\r",
+							"            },\r",
+							"            \"requestType\": {\r",
+							"                \"type\": \"string\"\r",
+							"            },\r",
+							"            \"earthRadius\": {\r",
+							"                \"type\": \"number\"\r",
+							"            },\r",
+							"            \"places\": {\r",
+							"                \"type\": \"array\"\r",
+							"            }\r",
+							"        }\r",
+							"    };\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(ajv.validate(schema, jsonData)).to.be.true;\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"id": "4cd9ab98-18c5-4e4f-a19c-d26871a2fde3",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"requestType\": \"distances\",\r\n    \"places\": [\r\n        {\"name\": \"Never, Amur Oblast, Russia\", \"latitude\": \"53.9766\", \"longitude\": \"124.1388\"},\r\n        {\"name\": \"Gonna, West Bengal, India\", \"latitude\": \"23.4576\", \"longitude\": \"87.6803\"},\r\n        {\"name\": \"Give, Denmark\", \"latitude\": \"55.8454\", \"longitude\": \"9.2370\"},\r\n        {\"name\": \"Youx, France\", \"latitude\": \"46.1454\", \"longitude\": \"2.7985\"},\r\n        {\"name\": \"Upi, Philippines\", \"latitude\": \"7.0186\", \"longitude\": \"124.1752\"},\r\n        {\"name\": \"North Pole\", \"latitude\": \"90.0\", \"longitude\": \"0.0\"},\r\n        {\"name\": \"South Pole\", \"latitude\": \"-90.0\", \"longitude\": \"0.0\"},\r\n        {\"name\": \"Greenwich, England\", \"latitude\": \"51.4769\", \"longitude\": \"-0.0005\"},\r\n        {\"name\": \"Rio de Janeiro, Brazil\", \"latitude\": \"-22.9068\", \"longitude\": \"-43.1729\"},\r\n        {\"name\": \"New York City, USA\", \"latitude\": \"40.7128\", \"longitude\": \"-74.0060\"},\r\n        {\"name\": \"Auckland, New Zealand\", \"latitude\": \"-36.8485\", \"longitude\": \"174.7633\"},\r\n        {\"name\": \"Cape Town, South Africa\", \"latitude\": \"-33.9249\", \"longitude\": \"18.4241\"}\r\n    ],\r\n    \"earthRadius\": 271828\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/api/distances",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"api",
+						"distances"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ayushad: 12 Places Cosines",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "6811e1ad-e769-46ce-8648-32096fa10fe0",
+						"exec": [
+							"pm.test(\"Status Test\", function() {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"JSON test\", function() {\r",
+							"    pm.response.to.be.withBody;\r",
+							"    pm.response.to.be.json;\r",
+							"});\r",
+							"\r",
+							"pm.test(\"requestType test\", function() {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.requestType).to.equal(\"distances\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"earthRadius test\", function() {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.earthRadius).to.equal(271828.0)\r",
+							"});\r",
+							"\r",
+							"pm.test(\"formula test\", function() {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.formula).to.equal(\"cosines\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"distances test\", function() {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    let correct_distances = [194034, 305380, 49822, 501278, 393688, 853973, 671208, 395961, 331051, 605602, 502287, 596363];\r",
+							"    pm.expect(jsonData.distances).to.not.equal(null);\r",
+							"    pm.expect(jsonData.distances).to.deep.equals(correct_distances);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Schema test\", function() {\r",
+							"    var Ajv = require(\"ajv\");\r",
+							"    var ajv = new Ajv({logger: console});\r",
+							"    var schema = {\r",
+							"        \"properties\": {\r",
+							"            \"distances\": {\r",
+							"                \"type\": \"array\",\r",
+							"                \"minItem\": 0\r",
+							"            },\r",
+							"            \"requestType\": {\r",
+							"                \"type\": \"string\"\r",
+							"            },\r",
+							"            \"earthRadius\": {\r",
+							"                \"type\": \"number\"\r",
+							"            },\r",
+							"            \"places\": {\r",
+							"                \"type\": \"array\"\r",
+							"            }\r",
+							"        }\r",
+							"    };\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(ajv.validate(schema, jsonData)).to.be.true;\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"id": "d4c2ac0b-6556-483a-a2c4-58c66378d68c",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"requestType\": \"distances\",\r\n    \"places\": [\r\n        {\"name\": \"Never, Amur Oblast, Russia\", \"latitude\": \"53.9766\", \"longitude\": \"124.1388\"},\r\n        {\"name\": \"Gonna, West Bengal, India\", \"latitude\": \"23.4576\", \"longitude\": \"87.6803\"},\r\n        {\"name\": \"Give, Denmark\", \"latitude\": \"55.8454\", \"longitude\": \"9.2370\"},\r\n        {\"name\": \"Youx, France\", \"latitude\": \"46.1454\", \"longitude\": \"2.7985\"},\r\n        {\"name\": \"Upi, Philippines\", \"latitude\": \"7.0186\", \"longitude\": \"124.1752\"},\r\n        {\"name\": \"North Pole\", \"latitude\": \"90.0\", \"longitude\": \"0.0\"},\r\n        {\"name\": \"South Pole\", \"latitude\": \"-90.0\", \"longitude\": \"0.0\"},\r\n        {\"name\": \"Greenwich, England\", \"latitude\": \"51.4769\", \"longitude\": \"-0.0005\"},\r\n        {\"name\": \"Rio de Janeiro, Brazil\", \"latitude\": \"-22.9068\", \"longitude\": \"-43.1729\"},\r\n        {\"name\": \"New York City, USA\", \"latitude\": \"40.7128\", \"longitude\": \"-74.0060\"},\r\n        {\"name\": \"Auckland, New Zealand\", \"latitude\": \"-36.8485\", \"longitude\": \"174.7633\"},\r\n        {\"name\": \"Cape Town, South Africa\", \"latitude\": \"-33.9249\", \"longitude\": \"18.4241\"}\r\n    ],\r\n    \"earthRadius\": 271828,\r\n    \"formula\": \"cosines\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/api/distances",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"api",
+						"distances"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ayushad: 12 Places Haversine",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "6811e1ad-e769-46ce-8648-32096fa10fe0",
+						"exec": [
+							"pm.test(\"Status Test\", function() {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"JSON test\", function() {\r",
+							"    pm.response.to.be.withBody;\r",
+							"    pm.response.to.be.json;\r",
+							"});\r",
+							"\r",
+							"pm.test(\"requestType test\", function() {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.requestType).to.equal(\"distances\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"earthRadius test\", function() {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.earthRadius).to.equal(271828.0)\r",
+							"});\r",
+							"\r",
+							"pm.test(\"formula test\", function() {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.formula).to.equal(\"haversine\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"distances test\", function() {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    let correct_distances = [194034, 305380, 49822, 501278, 393688, 853973, 671208, 395961, 331051, 605602, 502287, 596363];\r",
+							"    pm.expect(jsonData.distances).to.not.equal(null);\r",
+							"    pm.expect(jsonData.distances).to.deep.equals(correct_distances);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Schema test\", function() {\r",
+							"    var Ajv = require(\"ajv\");\r",
+							"    var ajv = new Ajv({logger: console});\r",
+							"    var schema = {\r",
+							"        \"properties\": {\r",
+							"            \"distances\": {\r",
+							"                \"type\": \"array\",\r",
+							"                \"minItem\": 0\r",
+							"            },\r",
+							"            \"requestType\": {\r",
+							"                \"type\": \"string\"\r",
+							"            },\r",
+							"            \"earthRadius\": {\r",
+							"                \"type\": \"number\"\r",
+							"            },\r",
+							"            \"places\": {\r",
+							"                \"type\": \"array\"\r",
+							"            }\r",
+							"        }\r",
+							"    };\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(ajv.validate(schema, jsonData)).to.be.true;\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"id": "bc27f5f7-c32a-4adf-924b-3ddfc584d8ef",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"requestType\": \"distances\",\r\n    \"places\": [\r\n        {\"name\": \"Never, Amur Oblast, Russia\", \"latitude\": \"53.9766\", \"longitude\": \"124.1388\"},\r\n        {\"name\": \"Gonna, West Bengal, India\", \"latitude\": \"23.4576\", \"longitude\": \"87.6803\"},\r\n        {\"name\": \"Give, Denmark\", \"latitude\": \"55.8454\", \"longitude\": \"9.2370\"},\r\n        {\"name\": \"Youx, France\", \"latitude\": \"46.1454\", \"longitude\": \"2.7985\"},\r\n        {\"name\": \"Upi, Philippines\", \"latitude\": \"7.0186\", \"longitude\": \"124.1752\"},\r\n        {\"name\": \"North Pole\", \"latitude\": \"90.0\", \"longitude\": \"0.0\"},\r\n        {\"name\": \"South Pole\", \"latitude\": \"-90.0\", \"longitude\": \"0.0\"},\r\n        {\"name\": \"Greenwich, England\", \"latitude\": \"51.4769\", \"longitude\": \"-0.0005\"},\r\n        {\"name\": \"Rio de Janeiro, Brazil\", \"latitude\": \"-22.9068\", \"longitude\": \"-43.1729\"},\r\n        {\"name\": \"New York City, USA\", \"latitude\": \"40.7128\", \"longitude\": \"-74.0060\"},\r\n        {\"name\": \"Auckland, New Zealand\", \"latitude\": \"-36.8485\", \"longitude\": \"174.7633\"},\r\n        {\"name\": \"Cape Town, South Africa\", \"latitude\": \"-33.9249\", \"longitude\": \"18.4241\"}\r\n    ],\r\n    \"earthRadius\": 271828,\r\n    \"formula\": \"haversine\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/api/distances",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"api",
+						"distances"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ayushad: Negative Radius",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "e84e9009-4e03-43a7-91bd-bb92cd8e6ebc",
+						"exec": [
+							"pm.test(\"Status Test\", function() {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"id": "3dbac006-b116-4c5a-8ed6-9abfe3ca99ef",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"requestType\": \"distances\",\r\n    \"places\": [\r\n        {\"name\": \"North Pole\", \"latitude\": \"90.0\", \"longitude\": \"0.0\"},\r\n        {\"name\": \"South Pole\", \"latitude\": \"-90.0\", \"longitude\": \"0.0\"},\r\n        {\"name\": \"Greenwich, England\", \"latitude\": \"51.4769\", \"longitude\": \"-0.0005\"},\r\n        {\"name\": \"Rio de Janeiro, Brazil\", \"latitude\": \"-22.9068\", \"longitude\": \"-43.1729\"},\r\n        {\"name\": \"New York City, USA\", \"latitude\": \"40.7128\", \"longitude\": \"-74.0060\"},\r\n        {\"name\": \"Auckland, New Zealand\", \"latitude\": \"-36.8485\", \"longitude\": \"174.7633\"},\r\n        {\"name\": \"Cape Town, South Africa\", \"latitude\": \"-33.9249\", \"longitude\": \"18.4241\"}\r\n    ],\r\n    \"earthRadius\": -100,\r\n    \"formula\": \"haversine\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/api/distances",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"api",
+						"distances"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ayushad: Latitude Out of Range",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "53d07298-51e5-4396-9bb5-012a700fd7c2",
+						"exec": [
+							"pm.test(\"Status Test\", function() {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"id": "ed4666dc-dcd0-4777-a52c-8819b2fab0f3",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"requestType\": \"distances\",\r\n    \"places\": [\r\n        {\"latitude\": \"100.9766\", \"longitude\": \"124.1388\"},\r\n        {\"latitude\": \"-100.4576\", \"longitude\": \"87.6803\"}\r\n    ],\r\n    \"earthRadius\": 271828,\r\n    \"formula\": \"cosines\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/api/distances",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"api",
+						"distances"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ayushad: Longitude Out of Range",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "53d07298-51e5-4396-9bb5-012a700fd7c2",
+						"exec": [
+							"pm.test(\"Status Test\", function() {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"id": "288a7615-75eb-4c30-9a48-4920acfed2f4",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"requestType\": \"distances\",\r\n    \"places\": [\r\n        {\"latitude\": \"10.9766\", \"longitude\": \"184.1388\"},\r\n        {\"latitude\": \"-10.4576\", \"longitude\": \"-187.6803\"}\r\n    ],\r\n    \"earthRadius\": 271828,\r\n    \"formula\": \"cosines\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/api/distances",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"api",
+						"distances"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ayushad: 6 Places No Formula",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "44f9c605-b1d7-43f5-92fe-ffddcd8f1434",
+						"exec": [
+							"pm.test(\"Status Test\", function() {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"JSON test\", function() {",
+							"    pm.response.to.be.withBody;",
+							"    pm.response.to.be.json;",
+							"});",
+							"",
+							"pm.test(\"requestType test\", function() {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.requestType).to.equal(\"distances\");",
+							"});",
+							"",
+							"pm.test(\"earthRadius test\", function() {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.earthRadius).to.equal(8675309)",
+							"});",
+							"",
+							"pm.test(\"distances test\", function() {",
+							"    var jsonData = pm.response.json();",
+							"    let correct_distances = [6563930, 14527875, 6651158, 15472385, 13191472, 13652239];",
+							"    pm.expect(jsonData.distances).to.not.equal(null);",
+							"    pm.expect(jsonData.distances).to.deep.equals(correct_distances);",
+							"});",
+							"",
+							"pm.test(\"Schema test\", function() {",
+							"    var Ajv = require(\"ajv\");",
+							"    var ajv = new Ajv({logger: console});",
+							"    var schema = {",
+							"        \"properties\": {",
+							"            \"distances\": {",
+							"                \"type\": \"array\",",
+							"                \"minItem\": 0",
+							"            },",
+							"            \"requestType\": {",
+							"                \"type\": \"string\"",
+							"            },",
+							"            \"earthRadius\": {",
+							"                \"type\": \"number\"",
+							"            },",
+							"            \"places\": {",
+							"                \"type\": \"array\"",
+							"            }",
+							"        }",
+							"    };",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(ajv.validate(schema, jsonData)).to.be.true;",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"id": "c687b36f-c350-4446-b969-9b2fff309c6b",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"requestType\": \"distances\",\n    \"places\": [\n        {\"name\": \"Fort Collins, USA\", \"latitude\": \"40.5912\", \"longitude\": \"-105.0843\"},\n        {\"name\": \"Galapagos National Park, Ecuador\", \"latitude\": \"-0.6276\", \"longitude\": \"-90.3293\"},\n        {\"name\": \"Annobon Natural Reserve, Equatorial Guinea\", \"latitude\": \"-1.4431\", \"longitude\": \"5.6377\"},\n        {\"name\": \"Monte Cinto, Corsica, France\", \"latitude\": \"42.3824\", \"longitude\": \"8.9479\"},\n        {\"name\": \"St. Paul Island, French Southern and Antarctic Islands\", \"latitude\": \"-38.7205\", \"longitude\": \"77.5194\"},\n        {\"name\": \"Iwo Island, Japan\", \"latitude\": \"24.8051\", \"longitude\": \"141.3248\"}\n    ],\n    \"earthRadius\": 8675309\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/api/distances",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"api",
+						"distances"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ayushad: Radius is Zero Vincenty",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "d6ffe99c-d3fb-4953-86f0-4ee2d903407e",
+						"exec": [
+							"pm.test(\"Status Test\", function() {",
+							"    pm.response.to.have.status(400);",
+							"});",
+							"",
+							"pm.test(\"JSON test\", function() {",
+							"    pm.response.to.be.withBody;",
+							"    pm.response.to.be.json;",
+							"});",
+							"",
+							"pm.test(\"requestType test\", function() {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.requestType).to.equal(\"distances\");",
+							"});",
+							"",
+							"pm.test(\"earthRadius test\", function() {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.earthRadius).to.equal(0)",
+							"});",
+							"",
+							"pm.test(\"Schema test\", function() {",
+							"    var Ajv = require(\"ajv\");",
+							"    var ajv = new Ajv({logger: console});",
+							"    var schema = {",
+							"        \"properties\": {",
+							"            \"distances\": {",
+							"                \"type\": \"array\",",
+							"                \"minItem\": 0",
+							"            },",
+							"            \"requestType\": {",
+							"                \"type\": \"string\"",
+							"            },",
+							"            \"earthRadius\": {",
+							"                \"type\": \"number\"",
+							"            },",
+							"            \"places\": {",
+							"                \"type\": \"array\"",
+							"            }",
+							"        }",
+							"    };",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(ajv.validate(schema, jsonData)).to.be.true;",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"id": "a5ff1051-1107-43f0-8762-28f7b632c53e",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"requestType\": \"distances\",\n    \"places\": [\n        {\"name\": \"Fort Collins, USA\", \"latitude\": \"40.5912\", \"longitude\": \"-105.0843\"},\n        {\"name\": \"Galapagos National Park, Ecuador\", \"latitude\": \"-0.6276\", \"longitude\": \"-90.3293\"},\n        {\"name\": \"Annobon Natural Reserve, Equatorial Guinea\", \"latitude\": \"-1.4431\", \"longitude\": \"5.6377\"},\n        {\"name\": \"Monte Cinto, Corsica, France\", \"latitude\": \"42.3824\", \"longitude\": \"8.9479\"},\n        {\"name\": \"St. Paul Island, French Southern and Antarctic Islands\", \"latitude\": \"-38.7205\", \"longitude\": \"77.5194\"},\n        {\"name\": \"Iwo Island, Japan\", \"latitude\": \"24.8051\", \"longitude\": \"141.3248\"}\n    ],\n    \"earthRadius\": 0,\n    \"formula\": \"vincenty\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/api/distances",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"api",
+						"distances"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ayushad: Radius is Zero Haversine",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "13e6239b-4dcd-4c88-a6ce-6421580c92ae",
+						"exec": [
+							"pm.test(\"Status Test\", function() {",
+							"    pm.response.to.have.status(400);",
+							"});",
+							"",
+							"pm.test(\"JSON test\", function() {",
+							"    pm.response.to.be.withBody;",
+							"    pm.response.to.be.json;",
+							"});",
+							"",
+							"pm.test(\"requestType test\", function() {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.requestType).to.equal(\"distances\");",
+							"});",
+							"",
+							"pm.test(\"earthRadius test\", function() {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.earthRadius).to.equal(0)",
+							"});",
+							"",
+							"pm.test(\"Schema test\", function() {",
+							"    var Ajv = require(\"ajv\");",
+							"    var ajv = new Ajv({logger: console});",
+							"    var schema = {",
+							"        \"properties\": {",
+							"            \"distances\": {",
+							"                \"type\": \"array\",",
+							"                \"minItem\": 0",
+							"            },",
+							"            \"requestType\": {",
+							"                \"type\": \"string\"",
+							"            },",
+							"            \"earthRadius\": {",
+							"                \"type\": \"number\"",
+							"            },",
+							"            \"places\": {",
+							"                \"type\": \"array\"",
+							"            }",
+							"        }",
+							"    };",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(ajv.validate(schema, jsonData)).to.be.true;",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"id": "4c5cfc83-93d7-4d9f-aa2f-db5ca93bde55",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"requestType\": \"distances\",\n    \"places\": [\n        {\"name\": \"Fort Collins, USA\", \"latitude\": \"40.5912\", \"longitude\": \"-105.0843\"},\n        {\"name\": \"Galapagos National Park, Ecuador\", \"latitude\": \"-0.6276\", \"longitude\": \"-90.3293\"},\n        {\"name\": \"Annobon Natural Reserve, Equatorial Guinea\", \"latitude\": \"-1.4431\", \"longitude\": \"5.6377\"},\n        {\"name\": \"Monte Cinto, Corsica, France\", \"latitude\": \"42.3824\", \"longitude\": \"8.9479\"},\n        {\"name\": \"St. Paul Island, French Southern and Antarctic Islands\", \"latitude\": \"-38.7205\", \"longitude\": \"77.5194\"},\n        {\"name\": \"Iwo Island, Japan\", \"latitude\": \"24.8051\", \"longitude\": \"141.3248\"}\n    ],\n    \"earthRadius\": 0,\n    \"formula\": \"haversine\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/api/distances",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"api",
+						"distances"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ayushad: Radius is Zero Cosines",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "2b112f49-21fd-47af-a1c5-db12287767e6",
+						"exec": [
+							"pm.test(\"Status Test\", function() {",
+							"    pm.response.to.have.status(400);",
+							"});",
+							"",
+							"pm.test(\"JSON test\", function() {",
+							"    pm.response.to.be.withBody;",
+							"    pm.response.to.be.json;",
+							"});",
+							"",
+							"pm.test(\"requestType test\", function() {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.requestType).to.equal(\"distances\");",
+							"});",
+							"",
+							"pm.test(\"earthRadius test\", function() {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.earthRadius).to.equal(0)",
+							"});",
+							"",
+							"pm.test(\"Schema test\", function() {",
+							"    var Ajv = require(\"ajv\");",
+							"    var ajv = new Ajv({logger: console});",
+							"    var schema = {",
+							"        \"properties\": {",
+							"            \"distances\": {",
+							"                \"type\": \"array\",",
+							"                \"minItem\": 0",
+							"            },",
+							"            \"requestType\": {",
+							"                \"type\": \"string\"",
+							"            },",
+							"            \"earthRadius\": {",
+							"                \"type\": \"number\"",
+							"            },",
+							"            \"places\": {",
+							"                \"type\": \"array\"",
+							"            }",
+							"        }",
+							"    };",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(ajv.validate(schema, jsonData)).to.be.true;",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"id": "7bfcf633-04c0-41ad-b39e-bf9bafa245b1",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"requestType\": \"distances\",\n    \"places\": [\n        {\"name\": \"Fort Collins, USA\", \"latitude\": \"40.5912\", \"longitude\": \"-105.0843\"},\n        {\"name\": \"Galapagos National Park, Ecuador\", \"latitude\": \"-0.6276\", \"longitude\": \"-90.3293\"},\n        {\"name\": \"Annobon Natural Reserve, Equatorial Guinea\", \"latitude\": \"-1.4431\", \"longitude\": \"5.6377\"},\n        {\"name\": \"Monte Cinto, Corsica, France\", \"latitude\": \"42.3824\", \"longitude\": \"8.9479\"},\n        {\"name\": \"St. Paul Island, French Southern and Antarctic Islands\", \"latitude\": \"-38.7205\", \"longitude\": \"77.5194\"},\n        {\"name\": \"Iwo Island, Japan\", \"latitude\": \"24.8051\", \"longitude\": \"141.3248\"}\n    ],\n    \"earthRadius\": 0,\n    \"formula\": \"cosines\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/api/distances",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"api",
+						"distances"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ayushad: Empty Places",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "7cfbfd5c-1e28-4064-b310-6bd11917db1c",
+						"exec": [
+							"pm.test(\"Status Test\", function() {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"JSON test\", function() {",
+							"    pm.response.to.be.withBody;",
+							"    pm.response.to.be.json;",
+							"});",
+							"",
+							"pm.test(\"requestType test\", function() {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.requestType).to.equal(\"distances\");",
+							"});",
+							"",
+							"pm.test(\"earthRadius test\", function() {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.earthRadius).to.equal(42)",
+							"});",
+							"",
+							"pm.test(\"distances test\", function() {",
+							"    var jsonData = pm.response.json();",
+							"    let correct_distances = [];",
+							"    pm.expect(jsonData.distances).to.not.equal(null);",
+							"    pm.expect(jsonData.distances).to.deep.equals(correct_distances);",
+							"});",
+							"",
+							"pm.test(\"Schema test\", function() {",
+							"    var Ajv = require(\"ajv\");",
+							"    var ajv = new Ajv({logger: console});",
+							"    var schema = {",
+							"        \"properties\": {",
+							"            \"distances\": {",
+							"                \"type\": \"array\",",
+							"                \"minItem\": 0",
+							"            },",
+							"            \"requestType\": {",
+							"                \"type\": \"string\"",
+							"            },",
+							"            \"earthRadius\": {",
+							"                \"type\": \"number\"",
+							"            },",
+							"            \"places\": {",
+							"                \"type\": \"array\"",
+							"            }",
+							"        }",
+							"    };",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(ajv.validate(schema, jsonData)).to.be.true;",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"id": "b9f939e7-73b5-488c-9a27-39282db55d94",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"requestType\": \"distances\",\n    \"places\": [],\n    \"earthRadius\": 42,\n    \"formula\": \"vincenty\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/api/distances",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"api",
+						"distances"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

@@ -1,0 +1,4 @@
+target
+.vscode
+server/.m2
+client/node_modules

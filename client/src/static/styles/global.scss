@@ -1,0 +1,55 @@
+// Text Styles
+
+a {
+    &:hover {
+        cursor: pointer;
+    }
+}
+
+.tco-text {
+    font-family: 'prox-light', sans-serif;
+    font-size: 16px;
+    color: white;
+}
+
+.tco-text-upper {
+    font-family: 'prox-light', sans-serif;
+    font-size: 28px;
+    letter-spacing: .05em;
+    line-height: 1em;
+    text-transform: uppercase;
+    color: white;
+}
+
+// Class Useful for Vertical Centering
+
+.vertical-center {
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+// Map Styles
+
+.mapStyle {
+    height: 40vh;
+    width: 100%;
+}
+
+.trip-header-title{
+    width: 100%;
+}
+
+.selected-row{
+    background-color: #C8C372;
+}
+
+.trip-header-actions{
+    width: .1em;
+}
+
+// Color Theme
+$primary: #52577d;
+
+@import "src/static/styles/header";
+@import "~bootstrap/scss/bootstrap";

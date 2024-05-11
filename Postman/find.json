@@ -1,0 +1,592 @@
+{
+	"info": {
+		"_postman_id": "a5c484b1-9c84-4185-bde7-55ad628bdbe2",
+		"name": "find",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_uid": "25883428-a5c484b1-9c84-4185-bde7-55ad628bdbe2"
+	},
+	"item": [
+		{
+			"name": "ayushad: Find all balloonports",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "e01bd7ea-0016-4885-811c-4329f6ba9218",
+						"exec": [
+							"pm.test(\"Status Test\", function() {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"JSON test\", function() {",
+							"    pm.response.to.be.withBody;",
+							"    pm.response.to.be.json;",
+							"});",
+							"",
+							"pm.test(\"requestType test\", function() {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.requestType).to.equal(\"find\");",
+							"});",
+							"",
+							"pm.test(\"places test\", function() {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.places).to.not.equal(null);",
+							"    pm.expect(jsonData.places.length).to.equal(10); // Fixed the syntax for checking the length",
+							"});",
+							"",
+							"pm.test(\"found test\", function() {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.found).to.equal(19);",
+							"});",
+							"",
+							"pm.test(\"Schema test\", function() {",
+							"    var Ajv = require(\"ajv\");",
+							"    var ajv = new Ajv({logger: console});",
+							"    var schema = {",
+							"        \"properties\": {",
+							"            \"requestType\": {",
+							"                \"type\": \"string\"",
+							"            },",
+							"            \"earthRadius\": {",
+							"                \"type\": \"number\"",
+							"            },",
+							"            \"places\": {",
+							"                \"type\": \"array\"",
+							"            },",
+							"            \"response\": {",
+							"                \"type\": \"number\"",
+							"            }",
+							"        }",
+							"    };",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(ajv.validate(schema, jsonData)).to.be.true;",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"id": "281054bd-9cf2-40e2-8275-3713f5089ce8",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"requestType\": \"find\",\n  \"match\": \"\",\n  \"limit\": 10,\n  \"type\": [\"balloonport\"]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/api/find",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"api",
+						"find"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ayushad: find 'base' in airports in US",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "e01bd7ea-0016-4885-811c-4329f6ba9218",
+						"exec": [
+							"pm.test(\"Status Test\", function() {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"JSON test\", function() {",
+							"    pm.response.to.be.withBody;",
+							"    pm.response.to.be.json;",
+							"});",
+							"",
+							"pm.test(\"requestType test\", function() {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.requestType).to.equal(\"find\");",
+							"});",
+							"",
+							"pm.test(\"places test\", function() {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.places).to.not.equal(null);",
+							"    pm.expect(jsonData.places.length).to.equal(5); // Fixed the syntax for checking the length",
+							"});",
+							"",
+							"pm.test(\"found test\", function() {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.found).to.equal(77);",
+							"});",
+							"",
+							"pm.test(\"Schema test\", function() {",
+							"    var Ajv = require(\"ajv\");",
+							"    var ajv = new Ajv({logger: console});",
+							"    var schema = {",
+							"        \"properties\": {",
+							"            \"requestType\": {",
+							"                \"type\": \"string\"",
+							"            },",
+							"            \"earthRadius\": {",
+							"                \"type\": \"number\"",
+							"            },",
+							"            \"places\": {",
+							"                \"type\": \"array\"",
+							"            },",
+							"            \"response\": {",
+							"                \"type\": \"number\"",
+							"            }",
+							"        }",
+							"    };",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(ajv.validate(schema, jsonData)).to.be.true;",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"id": "094ced82-f655-4a7d-8f65-6b7d4278d8d4",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"requestType\": \"find\",\n  \"match\": \"base\",\n  \"limit\": 5,\n  \"type\": [\"airport\"],\n  \"where\": [\"United States\"]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/api/find",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"api",
+						"find"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ayushad: find 'base' in other in US",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "e01bd7ea-0016-4885-811c-4329f6ba9218",
+						"exec": [
+							"pm.test(\"Status Test\", function() {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"JSON test\", function() {",
+							"    pm.response.to.be.withBody;",
+							"    pm.response.to.be.json;",
+							"});",
+							"",
+							"pm.test(\"requestType test\", function() {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.requestType).to.equal(\"find\");",
+							"});",
+							"",
+							"pm.test(\"places test\", function() {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.places).to.not.equal(null);",
+							"    pm.expect(jsonData.places.length).to.equal(5); // Fixed the syntax for checking the length",
+							"});",
+							"",
+							"pm.test(\"found test\", function() {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.found).to.equal(567);",
+							"});",
+							"",
+							"pm.test(\"Schema test\", function() {",
+							"    var Ajv = require(\"ajv\");",
+							"    var ajv = new Ajv({logger: console});",
+							"    var schema = {",
+							"        \"properties\": {",
+							"            \"requestType\": {",
+							"                \"type\": \"string\"",
+							"            },",
+							"            \"earthRadius\": {",
+							"                \"type\": \"number\"",
+							"            },",
+							"            \"places\": {",
+							"                \"type\": \"array\"",
+							"            },",
+							"            \"response\": {",
+							"                \"type\": \"number\"",
+							"            }",
+							"        }",
+							"    };",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(ajv.validate(schema, jsonData)).to.be.true;",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"id": "c4ed2287-6264-4a94-be9e-3fa700511710",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"requestType\": \"find\",\n  \"match\": \"base\",\n  \"limit\": 5,\n  \"type\": [\"other\"],\n  \"where\": [\"United States\"]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/api/find",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"api",
+						"find"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ayushad: Find farm, 0 limit",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "e01bd7ea-0016-4885-811c-4329f6ba9218",
+						"exec": [
+							"pm.test(\"Status Test\", function() {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"JSON test\", function() {",
+							"    pm.response.to.be.withBody;",
+							"    pm.response.to.be.json;",
+							"});",
+							"",
+							"pm.test(\"requestType test\", function() {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.requestType).to.equal(\"find\");",
+							"});",
+							"",
+							"pm.test(\"places test\", function() {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.places).to.not.equal(null);",
+							"    pm.expect(jsonData.places.length).to.equal(100); // Fixed the syntax for checking the length",
+							"});",
+							"",
+							"pm.test(\"found test\", function() {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.found).to.equal(863);",
+							"});",
+							"",
+							"pm.test(\"Schema test\", function() {",
+							"    var Ajv = require(\"ajv\");",
+							"    var ajv = new Ajv({logger: console});",
+							"    var schema = {",
+							"        \"properties\": {",
+							"            \"requestType\": {",
+							"                \"type\": \"string\"",
+							"            },",
+							"            \"earthRadius\": {",
+							"                \"type\": \"number\"",
+							"            },",
+							"            \"places\": {",
+							"                \"type\": \"array\"",
+							"            },",
+							"            \"response\": {",
+							"                \"type\": \"number\"",
+							"            }",
+							"        }",
+							"    };",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(ajv.validate(schema, jsonData)).to.be.true;",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"id": "38289735-4ddc-4eb7-bedc-272fd64066d2",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"requestType\": \"find\",\n    \"match\": \"farm\",\n    \"limit\": 0\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/api/find",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"api",
+						"find"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ayushad: Find heliports in US and Canada with \"red\"",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "e01bd7ea-0016-4885-811c-4329f6ba9218",
+						"exec": [
+							"pm.test(\"Status Test\", function() {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"JSON test\", function() {",
+							"    pm.response.to.be.withBody;",
+							"    pm.response.to.be.json;",
+							"});",
+							"",
+							"pm.test(\"requestType test\", function() {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.requestType).to.equal(\"find\");",
+							"});",
+							"",
+							"pm.test(\"places test\", function() {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.places).to.not.eql(null);",
+							"    pm.expect(jsonData.places.length).to.equal(5);",
+							"});",
+							"",
+							"pm.test(\"found test\", function() {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.found).to.equal(66);",
+							"});",
+							"",
+							"pm.test(\"check all heliports\", function () {",
+							"    var responseJSON = pm.response.json();",
+							"",
+							"    pm.expect(responseJSON).to.be.an('object');",
+							"    pm.expect(responseJSON.places).to.be.an('array');",
+							"",
+							"    responseJSON.places.forEach((place) => {",
+							"     pm.expect(place.type).to.equal('heliport');",
+							"    });",
+							"});",
+							"",
+							"pm.test(\"check if country is Canada or United States\", function () {",
+							"     var responseJSON = pm.response.json();",
+							"     pm.expect(responseJSON).to.be.an('object');",
+							"     responseJSON.places.forEach((place) => {",
+							"            pm.expect(place.country).to.satisfy((country) => {",
+							"                return country === 'Canada' || country === 'United States';",
+							"            }, \"Country should be Canada or United States\");",
+							"     });",
+							"});",
+							"",
+							"pm.test(\"Schema test\", function() {",
+							"    var Ajv = require(\"ajv\");",
+							"    var ajv = new Ajv({logger: console});",
+							"    var schema = {",
+							"        \"properties\": {",
+							"            \"requestType\": {",
+							"                \"type\": \"string\"",
+							"            },",
+							"            \"earthRadius\": {",
+							"                \"type\": \"number\"",
+							"            },",
+							"            \"places\": {",
+							"                \"type\": \"array\"",
+							"            },",
+							"            \"response\": {",
+							"                \"type\": \"number\"",
+							"            }",
+							"        }",
+							"    };",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(ajv.validate(schema, jsonData)).to.be.true;",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"id": "588f2f02-3084-4c84-9ea0-0019dab4c0fc",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"requestType\": \"find\",\n    \"match\": \"red\",\n    \"limit\": 5,\n    \"type\": [\"heliport\"],\n    \"where\": [\"United States\", \"Canada\"]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/api/find",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"api",
+						"find"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ayushad: Find heliports in US and Mexico with \"Mexico\"",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "e01bd7ea-0016-4885-811c-4329f6ba9218",
+						"exec": [
+							"pm.test(\"Status Test\", function() {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"JSON test\", function() {",
+							"    pm.response.to.be.withBody;",
+							"    pm.response.to.be.json;",
+							"});",
+							"",
+							"pm.test(\"requestType test\", function() {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.requestType).to.equal(\"find\");",
+							"});",
+							"",
+							"pm.test(\"places test\", function() {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.places).to.not.eql(null);",
+							"    pm.expect(jsonData.places.length).to.equal(5);",
+							"});",
+							"",
+							"pm.test(\"found test\", function() {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.found).to.equal(66);",
+							"});",
+							"",
+							"pm.test(\"check all heliports\", function () {",
+							"    var responseJSON = pm.response.json();",
+							"",
+							"    pm.expect(responseJSON).to.be.an('object');",
+							"    pm.expect(responseJSON.places).to.be.an('array');",
+							"",
+							"    responseJSON.places.forEach((place) => {",
+							"     pm.expect(place.type).to.equal('heliport');",
+							"    });",
+							"});",
+							"",
+							"pm.test(\"check if country is Canada or United States\", function () {",
+							"     var responseJSON = pm.response.json();",
+							"     pm.expect(responseJSON).to.be.an('object');",
+							"     responseJSON.places.forEach((place) => {",
+							"            pm.expect(place.country).to.satisfy((country) => {",
+							"                return country === 'Canada' || country === 'United States';",
+							"            }, \"Country should be Canada or United States\");",
+							"     });",
+							"});",
+							"",
+							"pm.test(\"Schema test\", function() {",
+							"    var Ajv = require(\"ajv\");",
+							"    var ajv = new Ajv({logger: console});",
+							"    var schema = {",
+							"        \"properties\": {",
+							"            \"requestType\": {",
+							"                \"type\": \"string\"",
+							"            },",
+							"            \"earthRadius\": {",
+							"                \"type\": \"number\"",
+							"            },",
+							"            \"places\": {",
+							"                \"type\": \"array\"",
+							"            },",
+							"            \"response\": {",
+							"                \"type\": \"number\"",
+							"            }",
+							"        }",
+							"    };",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(ajv.validate(schema, jsonData)).to.be.true;",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"id": "7bed6ee2-0db5-4d30-9430-bb311a2ad001",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"requestType\": \"find\",\n    \"match\": \"red\",\n    \"limit\": 5,\n    \"type\": [\"heliport\"],\n    \"where\": [\"United States\", \"Canada\"]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/api/find",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"api",
+						"find"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
