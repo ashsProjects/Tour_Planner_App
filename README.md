@@ -6,10 +6,21 @@
 TODO description
 
 ## Mobile Display
-<video src="./static/Mobile_Full.mp4" width="100%" height="100%" controls></video>
+```
+Adding places to the tour using the map
+```
+<img src='./static/Mobile_Add_Map.gif'>
+Adding places to the map using name or coordinates and filtering by country or type
+<img src='./static/Mobile_Where_Type.gif'>
+<img src='./static/Mobile_Optimize.gif'>
+<img src='./static/Mobile_500.gif'>
 
 ## Window Display
-<video src="./static/Window_Full.mp4" width="100%" height="100%" controls></video>
+<img src='./static/Mobile_Add_Place.gif'>
+<img src='./static/Mobile_Where_Near.gif'>
+<img src='./static/Mobile_Optimizations.gif'>
+<img src='./static/Mobile_500.gif'>
+<img src='./static/Mobile_Save.gif'>
 
 ## Project Structure
 ```
