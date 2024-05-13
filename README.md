@@ -1,4 +1,4 @@
-# Trip Planner Web App
+# Tour Planner Web App
 ### Ayush Adhikari
 #### Originally a part of CS314: Software Engineering at Colorado State University
 <hr>
